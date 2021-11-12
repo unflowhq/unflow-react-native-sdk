@@ -5,6 +5,7 @@ import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.Promise
+import com.unflow.androidsdk.UnflowSdk
 
 class UnflowReactNativeSdkModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
 
@@ -22,8 +23,21 @@ class UnflowReactNativeSdkModule(reactContext: ReactApplicationContext) : ReactC
     }
 
     @ReactMethod
+    fun initialize(apiKey: String, enableLogging: Boolean) {
+      Log.d("Unflow", "INITIALIZING")
+      UnflowSdk.initialize(
+        context = reactApplicationContext,
+        config = UnflowSdk.Config(apiKey, enableLogging),
+        analyticsListener = null
+      )
+      Log.d("Unflow", "DONE INITIALIZING")
+    }
+
+    @ReactMethod
     fun sync() {
-      Log.d("Unflow", "This is the sync")
+      Log.d("Unflow", "SYNCING")
+      UnflowSdk.client().sync()
+      Log.d("Unflow", "DONE SYNCING")
     }
 
 
