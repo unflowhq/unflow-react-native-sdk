@@ -1,5 +1,6 @@
 package com.unflowreactnativesdk
 
+import android.util.Log
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
@@ -15,10 +16,15 @@ class UnflowReactNativeSdkModule(reactContext: ReactApplicationContext) : ReactC
     // See https://reactnative.dev/docs/native-modules-android
     @ReactMethod
     fun multiply(a: Int, b: Int, promise: Promise) {
-    
+
       promise.resolve(a * b)
-    
+
     }
 
-    
+    @ReactMethod
+    fun sync() {
+      Log.d("Unflow", "This is the sync")
+    }
+
+
 }

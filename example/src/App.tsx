@@ -8,6 +8,7 @@ export default function App() {
 
   React.useEffect(() => {
     UnflowReactNativeSdk.multiply(3, 7).then(setResult);
+    UnflowReactNativeSdk.sync();
   }, []);
 
   return (
