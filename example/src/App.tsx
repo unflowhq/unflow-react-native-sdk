@@ -1,20 +1,21 @@
 import * as React from 'react';
 
 import { StyleSheet, View, Text } from 'react-native';
-import UnflowReactNativeSdk from 'unflow-react-native-sdk';
+import UnflowReactNativeSdk, { OpenerView } from 'unflow-react-native-sdk';
 
 export default function App() {
   const [result, setResult] = React.useState<number | undefined>();
 
   React.useEffect(() => {
     UnflowReactNativeSdk.multiply(3, 7).then(setResult);
-    UnflowReactNativeSdk.initialize('thisismykey', false);
+    UnflowReactNativeSdk.initialize('a4d9813852bde4511755d9adb2b5716b', false);
     UnflowReactNativeSdk.sync();
   }, []);
 
   return (
     <View style={styles.container}>
       <Text>Result: {result}</Text>
+      <OpenerView style={{ flex: 1, width: '100%' }} />
     </View>
   );
 }
