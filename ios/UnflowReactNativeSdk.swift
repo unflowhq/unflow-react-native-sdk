@@ -1,3 +1,12 @@
+import Unflow
+import UnflowUI
+
+class UnflowAnalyticsListener: AnalyticsListener {
+    func onEvent(event: UnflowEvent) {
+        print("\(event.name) attributes: \(event.attributes)")
+    }
+}
+
 @objc(UnflowReactNativeSdk)
 class UnflowReactNativeSdk: NSObject {
 
@@ -8,11 +17,18 @@ class UnflowReactNativeSdk: NSObject {
 
     @objc(initialize:withEnableLogging:)
     func initialize(apiKey: String, enableLogging: Bool) -> Void {
-        NSLog("UNFLOW - INITIALIZING")
+        DispatchQueue.main.async {
+            UnflowSDK.initialize(
+                config: UnflowSDK.Config(apiKey: apiKey, enableLogging: enableLogging),
+                analyticsListener: UnflowAnalyticsListener()
+            )
+        }
     }
 
     @objc(sync)
     func sync() -> Void {
-        NSLog("UNFLOW - SYNCING")
+        DispatchQueue.main.async {
+            UnflowSDK.client.sync()
+        }
     }
 }

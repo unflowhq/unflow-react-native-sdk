@@ -15,7 +15,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text>Result: {result}</Text>
-      <OpenerView style={{ flex: 1, width: '100%' }} />
+      <OpenerView />
     </View>
   );
 }
@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: 'green',
   },
   box: {
     width: 60,
