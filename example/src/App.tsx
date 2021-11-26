@@ -8,13 +8,13 @@ export default function App() {
 
   React.useEffect(() => {
     UnflowReactNativeSdk.multiply(3, 7).then(setResult);
-    UnflowReactNativeSdk.initialize('a4d9813852bde4511755d9adb2b5716b', false);
+    UnflowReactNativeSdk.initialize('ae469c05ed6d8f7c1d46d12901f661c9', true);
     UnflowReactNativeSdk.sync();
   }, []);
 
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <Text style={{ flex: 2 }}>Result: {result}</Text>
       <OpenerView />
     </View>
   );
@@ -27,9 +27,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'green',
   },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
-  },
+  // box: {
+  //   width: 60,
+  //   height: 60,
+  //   marginVertical: 20,
+  // },
 });
