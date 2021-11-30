@@ -7,8 +7,8 @@ class UnflowAnalyticsListener: AnalyticsListener {
     }
 }
 
-@objc(UnflowReactNativeSdk)
-class UnflowReactNativeSdk: NSObject {
+@objc(Unflow)
+class Unflow: NSObject {
 
     @objc(multiply:withB:withResolver:withRejecter:)
     func multiply(a: Float, b: Float, resolve:RCTPromiseResolveBlock,reject:RCTPromiseRejectBlock) -> Void {
