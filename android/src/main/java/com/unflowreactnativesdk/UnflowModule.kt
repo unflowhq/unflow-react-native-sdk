@@ -3,10 +3,10 @@ package com.unflowreactnativesdk
 import com.facebook.react.bridge.*
 import com.unflow.androidsdk.UnflowSdk
 
-class UnflowReactNativeSdkModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
+class UnflowModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
 
     override fun getName(): String {
-        return "UnflowReactNativeSdk"
+        return "Unflow"
     }
 
     // Example method

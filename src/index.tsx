@@ -1,8 +1,8 @@
 import { NativeModules, requireNativeComponent, ViewStyle } from 'react-native';
 
-const { UnflowReactNativeSdk } = NativeModules;
+const { Unflow } = NativeModules;
 
-type UnflowReactNativeSdkType = {
+type UnflowType = {
   multiply(a: number, b: number): Promise<number>;
   initialize(apiKey: string, enableLogging: boolean): null;
   sync(): null;
@@ -26,4 +26,4 @@ const OpenerView = requireNativeComponent<OpenerViewProps>(
 );
 
 export { OpenerView };
-export default UnflowReactNativeSdk as UnflowReactNativeSdkType;
+export default Unflow as UnflowType;
