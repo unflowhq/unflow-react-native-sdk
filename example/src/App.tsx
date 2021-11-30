@@ -10,6 +10,8 @@ export default function App() {
     UnflowReactNativeSdk.multiply(3, 7).then(setResult);
     UnflowReactNativeSdk.initialize('a4d9813852bde4511755d9adb2b5716b', false);
     UnflowReactNativeSdk.sync();
+    UnflowReactNativeSdk.setUserId('1234567');
+    UnflowReactNativeSdk.setAttributes({ name: 'David' });
   }, []);
 
   return (
