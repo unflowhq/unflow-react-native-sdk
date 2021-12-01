@@ -1,15 +1,17 @@
 import * as React from 'react';
 
 import { StyleSheet, View, Text } from 'react-native';
-import UnflowReactNativeSdk, { OpenerView } from 'unflow-react-native-sdk';
+import Unflow, { OpenerView } from 'unflow-react-native-sdk';
 
 export default function App() {
   const [result, setResult] = React.useState<number | undefined>();
 
   React.useEffect(() => {
-    UnflowReactNativeSdk.multiply(3, 7).then(setResult);
-    UnflowReactNativeSdk.initialize('ae469c05ed6d8f7c1d46d12901f661c9', true);
-    UnflowReactNativeSdk.sync();
+    Unflow.multiply(3, 7).then(setResult);
+    Unflow.initialize('a4d9813852bde4511755d9adb2b5716b', false);
+    Unflow.sync();
+    Unflow.setUserId('1234567');
+    Unflow.setAttributes({ name: 'David' });
   }, []);
 
   return (

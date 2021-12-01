@@ -123,5 +123,5 @@ dependencies {
   // noinspection GradleDynamicVersion
   implementation 'com.facebook.react:react-native:0.66.3'
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  implementation "com.unflow:unflow-ui:1.0.3"
+  implementation "com.unflow:unflow-ui:1.1.0"
 }

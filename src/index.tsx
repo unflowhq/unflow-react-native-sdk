@@ -1,11 +1,20 @@
 import { NativeModules, requireNativeComponent, ViewStyle } from 'react-native';
 
-const { UnflowReactNativeSdk } = NativeModules;
+const { Unflow } = NativeModules;
 
-type UnflowReactNativeSdkType = {
+type UnflowType = {
   multiply(a: number, b: number): Promise<number>;
   initialize(apiKey: string, enableLogging: boolean): null;
   sync(): null;
+  setUserId(userId: string): null;
+  setAttributes({}): null;
+  setCustomFonts({}: {
+    title: string;
+    body: string;
+    button: string;
+    openerTitle: string;
+    openerSubtitle: string;
+  }): null;
 };
 
 type OpenerViewProps = {
@@ -17,4 +26,4 @@ const OpenerView = requireNativeComponent<OpenerViewProps>(
 );
 
 export { OpenerView };
-export default UnflowReactNativeSdk as UnflowReactNativeSdkType;
+export default Unflow as UnflowType;
