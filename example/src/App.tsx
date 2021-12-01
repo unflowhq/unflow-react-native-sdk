@@ -29,9 +29,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'green',
   },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
-  },
+  // box: {
+  //   width: 60,
+  //   height: 60,
+  //   marginVertical: 20,
+  // },
 });
