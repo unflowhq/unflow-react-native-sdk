@@ -28,7 +28,9 @@ class Unflow: NSObject {
     @objc(sync)
     func sync() -> Void {
         DispatchQueue.main.async {
-            UnflowSDK.client.sync()
+            if #available(iOS 13.0, *) {
+                UnflowSDK.client.sync()
+            }
         }
     }
 }

@@ -8,10 +8,10 @@ export default function App() {
 
   React.useEffect(() => {
     Unflow.multiply(3, 7).then(setResult);
-    Unflow.initialize('a4d9813852bde4511755d9adb2b5716b', false);
+    Unflow.initialize('a4d9813852bde4511755d9adb2b5716b', true);
     Unflow.sync();
-    Unflow.setUserId('1234567');
-    Unflow.setAttributes({ name: 'David' });
+    // Unflow.setUserId('1234567');
+    // Unflow.setAttributes({ name: 'David' });
   }, []);
 
   return (
