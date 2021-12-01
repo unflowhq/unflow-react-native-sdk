@@ -14,7 +14,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text style={{ flex: 2 }}>Result: {result}</Text>
+      <Text>Result: {result}</Text>
       <OpenerView />
     </View>
   );

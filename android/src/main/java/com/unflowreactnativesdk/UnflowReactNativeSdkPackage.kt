@@ -5,7 +5,6 @@ import com.facebook.react.bridge.NativeModule
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.uimanager.ViewManager
 
-
 class UnflowReactNativeSdkPackage : ReactPackage {
 
     override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
@@ -13,6 +12,6 @@ class UnflowReactNativeSdkPackage : ReactPackage {
     }
 
     override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
-      return listOf(UnflowReactNativeSdkViewManager(reactContext))
+      return listOf(UnflowReactNativeSdkViewManager())
     }
 }
