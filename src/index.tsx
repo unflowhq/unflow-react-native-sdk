@@ -3,7 +3,6 @@ import { NativeModules, requireNativeComponent, ViewStyle } from 'react-native';
 const { Unflow } = NativeModules;
 
 type UnflowType = {
-  multiply(a: number, b: number): Promise<number>;
   initialize(apiKey: string, enableLogging: boolean): null;
   sync(): null;
   setUserId(userId: string): null;

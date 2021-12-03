@@ -10,25 +10,26 @@ class UnflowAnalyticsListener: AnalyticsListener {
 @objc(Unflow)
 class Unflow: NSObject {
 
-    @objc(multiply:withB:withResolver:withRejecter:)
-    func multiply(a: Float, b: Float, resolve:RCTPromiseResolveBlock,reject:RCTPromiseRejectBlock) -> Void {
-        resolve(a*b)
-    }
-
     @objc(initialize:withEnableLogging:)
     func initialize(apiKey: String, enableLogging: Bool) -> Void {
-        DispatchQueue.main.async {
-            UnflowSDK.initialize(
-                config: UnflowSDK.Config(apiKey: apiKey, enableLogging: enableLogging),
-                analyticsListener: UnflowAnalyticsListener()
-            )
-        }
+        UnflowSDK.initialize(
+            config: UnflowSDK.Config(apiKey: apiKey, enableLogging: enableLogging),
+            analyticsListener: UnflowAnalyticsListener()
+        )
     }
 
     @objc(sync)
     func sync() -> Void {
-        DispatchQueue.main.async {
+        if #available(iOS 13.0, *) {
             UnflowSDK.client.sync()
         }
+    }
+    
+    @objc static func requiresMainQueueSetup() -> Bool {
+        return true
+    }
+    
+    @objc func methodQueue() -> DispatchQueue {
+        return DispatchQueue.main
     }
 }

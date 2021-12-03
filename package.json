@@ -1,6 +1,6 @@
 {
   "name": "unflow-react-native-sdk",
-  "version": "0.1.0",
+  "version": "1.1.0",
   "description": "A React Native SDK for Unflow",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",

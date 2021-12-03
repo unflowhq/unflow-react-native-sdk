@@ -1,24 +1,31 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, Text, SafeAreaView } from 'react-native';
 import Unflow, { OpenerView } from 'unflow-react-native-sdk';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
+  Unflow.initialize('a4d9813852bde4511755d9adb2b5716b', true);
+  Unflow.sync();
 
   React.useEffect(() => {
-    Unflow.multiply(3, 7).then(setResult);
-    Unflow.initialize('a4d9813852bde4511755d9adb2b5716b', false);
-    Unflow.sync();
-    Unflow.setUserId('1234567');
-    Unflow.setAttributes({ name: 'David' });
+    // Unflow.initialize('a4d9813852bde4511755d9adb2b5716b', true);
+    // Unflow.sync();
+    // Unflow.setUserId('1234567');
+    // Unflow.setAttributes({ name: 'David' });
   }, []);
 
   return (
-    <View style={styles.container}>
-      <Text>Result: {result}</Text>
-      <OpenerView />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <Text>Padding</Text>
+      <Text>Padding</Text>
+      <Text>Padding</Text>
+      <Text>Padding</Text>
+      <Text>Padding</Text>
+
+      <OpenerView
+        style={{ height: 80, width: '100%', backgroundColor: 'red' }}
+      />
+    </SafeAreaView>
   );
 }
 
