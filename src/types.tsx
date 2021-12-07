@@ -11,10 +11,10 @@ export type UnflowType = {
   setUserId(userId: string): null;
   setAttributes({}): null;
   setCustomFonts({}: {
-    title: string;
-    body: string;
-    button: string;
-    openerTitle: string;
-    openerSubtitle: string;
+    title?: string;
+    body?: string;
+    button?: string;
+    openerTitle?: string;
+    openerSubtitle?: string;
   }): null;
 };
