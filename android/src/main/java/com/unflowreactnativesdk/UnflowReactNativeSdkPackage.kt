@@ -12,6 +12,6 @@ class UnflowReactNativeSdkPackage : ReactPackage {
     }
 
     override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
-      return listOf(UnflowReactNativeSdkViewManager())
+      return listOf(UnflowOpenerViewManager())
     }
 }

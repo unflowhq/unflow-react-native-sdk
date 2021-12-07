@@ -1,5 +1,6 @@
 import Unflow
 import UnflowUI
+import SwiftUI
 
 class UnflowAnalyticsListener: AnalyticsListener {
     func onEvent(event: UnflowEvent) {
@@ -24,7 +25,35 @@ class Unflow: NSObject {
             UnflowSDK.client.sync()
         }
     }
-    
+
+    @objc(setUserId:)
+    func setUserId(userId: String) -> Void {
+        UnflowSDK.client.setUserId(userId: userId)
+    }
+
+    @objc(setAttributes:)
+    func setAttributes(attributes: NSDictionary) -> Void {
+        guard let mappedAttribtues = attributes as? [String: String] else {
+            return
+        }
+        UnflowSDK.client.setAttributes(attributes: mappedAttribtues)
+    }
+
+    @objc(setCustomFonts:)
+    func setCustomFonts(fonts: NSDictionary) -> Void {
+        if #available(iOS 13.0, *) {
+            UnflowSDK.client.setCustomFonts(
+                fonts: .init(
+                    title: (fonts["title"] != nil) ? .custom(fonts["title"] as! String, size: 24) : nil,
+                    body: (fonts["body"] != nil) ? .custom(fonts["body"] as! String, size: 16) : nil,
+                    button: (fonts["button"] != nil) ? .custom(fonts["button"] as! String, size: 16) : nil,
+                    openerTitle: (fonts["openerTitle"] != nil) ? .custom(fonts["openerTitle"] as! String, size: 14) : nil,
+                    openerSubtitle: (fonts["openerSubtitle"] != nil) ? .custom(fonts["openerSubtitle"] as! String, size: 12) : nil
+                )
+            )
+        }
+    }
+
     @objc static func requiresMainQueueSetup() -> Bool {
         return true
     }
