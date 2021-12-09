@@ -3,10 +3,11 @@ import { SafeAreaView, StyleSheet, Text } from 'react-native';
 import Unflow, { OpenerView } from 'unflow-react-native-sdk';
 
 export default function App() {
-  Unflow.initialize('a4d9813852bde4511755d9adb2b5716b', false);
+  // Do this as early as possible in your app
+  Unflow.initialize('<YOUR_API_KEY>', true);
   Unflow.sync();
-  Unflow.setUserId('userId_fks35f');
-  Unflow.setAttributes({ name: 'Kavi Dhokia' });
+  Unflow.setUserId('<USER_ID>');
+  Unflow.setAttributes({ name: 'Joe Bloggs' });
 
   return (
     <SafeAreaView style={styles.container}>
@@ -18,8 +19,5 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'green',
-  },
+  container: { flex: 1 },
 });

@@ -9,13 +9,6 @@ class UnflowModule(reactContext: ReactApplicationContext) : ReactContextBaseJava
         return "Unflow"
     }
 
-    // Example method
-    // See https://reactnative.dev/docs/native-modules-android
-    @ReactMethod
-    fun multiply(a: Int, b: Int, promise: Promise) {
-      promise.resolve(a * b)
-    }
-
     @ReactMethod
     fun initialize(apiKey: String, enableLogging: Boolean) {
       UnflowSdk.initialize(
@@ -43,7 +36,7 @@ class UnflowModule(reactContext: ReactApplicationContext) : ReactContextBaseJava
 
     @ReactMethod
     fun setCustomFonts(fonts: ReadableMap) {
-      TODO("Pull font family from assets")
+//      TODO("Pull font family from assets")
 //      UnflowSdk.client().setCustomFonts(fonts = Fonts(
 //
 //      ))
