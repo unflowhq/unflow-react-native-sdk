@@ -14,7 +14,5 @@ export default function OpenerView(): ReactElement {
 }
 
 const styles = StyleSheet.create({
-  opener: {
-    width: '100%',
-  },
+  opener: { width: '100%' },
 });

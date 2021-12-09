@@ -1,27 +1,17 @@
-# unflow-react-native-sdk
+<img src="https://assets.website-files.com/60ec14d48c97af8448ff08ee/616d6f931575a91b29488520_Unflow%20Logo.svg" alt="Unflow" width="256" style="max-width:100%;">
 
-A React Native SDK for Unflow
+Tired of building the same simple screens over and over again? Empower your product team to create and ship content using the Unflow mobile SDK.
 
 ## Installation
 
 ```sh
-npm install unflow-react-native-sdk
+yarn add unflow-react-native-sdk
 ```
 
-## Usage
+## Documentation
 
-```js
-import UnflowReactNativeSdk from "unflow-react-native-sdk";
-
-// ...
-
-const result = await UnflowReactNativeSdk.multiply(3, 7);
-```
+Please visit [docs.unflow.com](https://docs.unflow.com/) for Quick Start and detailed explanations of features, usage, and more info.
 
 ## Contributing
 
 See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
-
-## License
-
-MIT
