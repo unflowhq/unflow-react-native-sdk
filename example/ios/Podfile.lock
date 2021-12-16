@@ -426,7 +426,7 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: bbbdb3d8fcf327c6e2249ee71b6ef1764b7dc266
   ReactCommon: 9bac022ab71596f2b0fde1268272543184c63971
   Unflow: 1900268a430cf0318a528e7801bd5f5b1239fd7b
-  unflow-react-native-sdk: cc0d1c8e072f47463ea9b49ecee62d8da8b986cc
+  unflow-react-native-sdk: 079d0844da459e3d9ddc668501f098e2fc553690
   Yoga: 32a18c0e845e185f4a2a66ec76e1fd1f958f22fa
 
 PODFILE CHECKSUM: 2f7e7ee6a7ffc4e29a2a92b4aab09152af82ed23

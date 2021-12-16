@@ -9,7 +9,7 @@ export type UnflowType = {
   initialize(apiKey: string, enableLogging: boolean): null;
   sync(): null;
   setUserId(userId: string): null;
-  setAttributes({}): null;
+  setAttributes({}: { [key: string]: string }): null;
   setCustomFonts({}: {
     title?: string;
     body?: string;

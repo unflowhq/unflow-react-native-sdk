@@ -7,6 +7,7 @@ export default function App() {
   Unflow.initialize('<YOUR_API_KEY>', true);
   Unflow.sync();
   Unflow.setUserId('<USER_ID>');
+  Unflow.setCustomFonts({ button: 'shadowsintolight_regular' });
   Unflow.setAttributes({ name: 'Joe Bloggs' });
 
   return (

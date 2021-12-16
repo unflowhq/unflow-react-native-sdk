@@ -5,7 +5,7 @@ Tired of building the same simple screens over and over again? Empower your prod
 ## Installation
 
 ```sh
-yarn add unflow-react-native-sdk
+yarn add unflow-react-native
 ```
 
 ## Documentation
