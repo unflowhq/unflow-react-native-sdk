@@ -1,4 +1,4 @@
-package com.unflowreactnativesdk
+package com.unflow.reactnative
 
 import com.facebook.react.bridge.*
 import com.unflow.androidsdk.UnflowSdk

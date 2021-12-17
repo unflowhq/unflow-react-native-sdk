@@ -1,11 +1,11 @@
-package com.unflowreactnativesdk
+package com.unflow.reactnative
 
 import com.facebook.react.ReactPackage
 import com.facebook.react.bridge.NativeModule
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.uimanager.ViewManager
 
-class UnflowReactNativeSdkPackage : ReactPackage {
+class UnflowReactNativePackage : ReactPackage {
 
     override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
         return listOf(UnflowModule(reactContext))

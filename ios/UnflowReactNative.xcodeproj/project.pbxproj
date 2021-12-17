@@ -19,10 +19,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		134814201AA4EA6300B7C361 /* libUnflowReactNativeSdk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libUnflowReactNativeSdk.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		5A1C11EA2757E5AD00F4F905 /* UnflowReactNativeSdkViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnflowReactNativeSdkViewManager.swift; sourceTree = "<group>"; };
+		134814201AA4EA6300B7C361 /* libUnflowReactNative.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libUnflowReactNative.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A1C11EA2757E5AD00F4F905 /* UnflowReactNativeViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnflowReactNativeViewManager.swift; sourceTree = "<group>"; };
 		5A1C11EB2757E5AD00F4F905 /* Unflow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unflow.swift; sourceTree = "<group>"; };
-		5A1C11EC2757E5AD00F4F905 /* UnflowReactNativeSdkViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnflowReactNativeSdkViewManager.m; sourceTree = "<group>"; };
+		5A1C11EC2757E5AD00F4F905 /* UnflowReactNativeViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnflowReactNativeViewManager.m; sourceTree = "<group>"; };
 		5A1C11ED2757E5AD00F4F905 /* Unflow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Unflow.m; sourceTree = "<group>"; };
 		5A1C11EE2757E5AD00F4F905 /* Unflow-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Unflow-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -41,7 +41,7 @@
 		134814211AA4EA7D00B7C361 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				134814201AA4EA6300B7C361 /* libUnflowReactNativeSdk.a */,
+				134814201AA4EA6300B7C361 /* libUnflowReactNative.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -52,8 +52,8 @@
 				5A1C11EE2757E5AD00F4F905 /* Unflow-Bridging-Header.h */,
 				5A1C11ED2757E5AD00F4F905 /* Unflow.m */,
 				5A1C11EB2757E5AD00F4F905 /* Unflow.swift */,
-				5A1C11EC2757E5AD00F4F905 /* UnflowReactNativeSdkViewManager.m */,
-				5A1C11EA2757E5AD00F4F905 /* UnflowReactNativeSdkViewManager.swift */,
+				5A1C11EC2757E5AD00F4F905 /* UnflowReactNativeViewManager.m */,
+				5A1C11EA2757E5AD00F4F905 /* UnflowReactNativeViewManager.swift */,
 				134814211AA4EA7D00B7C361 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -61,9 +61,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		58B511DA1A9E6C8500147676 /* UnflowReactNativeSdk */ = {
+		58B511DA1A9E6C8500147676 /* UnflowReactNative */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "UnflowReactNativeSdk" */;
+			buildConfigurationList = 58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "UnflowReactNative" */;
 			buildPhases = (
 				58B511D71A9E6C8500147676 /* Sources */,
 				58B511D81A9E6C8500147676 /* Frameworks */,
@@ -73,9 +73,9 @@
 			);
 			dependencies = (
 			);
-			name = UnflowReactNativeSdk;
+			name = UnflowReactNative;
 			productName = RCTDataManager;
-			productReference = 134814201AA4EA6300B7C361 /* libUnflowReactNativeSdk.a */;
+			productReference = 134814201AA4EA6300B7C361 /* libUnflowReactNative.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -92,7 +92,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "UnflowReactNativeSdk" */;
+			buildConfigurationList = 58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "UnflowReactNative" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -105,7 +105,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				58B511DA1A9E6C8500147676 /* UnflowReactNativeSdk */,
+				58B511DA1A9E6C8500147676 /* UnflowReactNative */,
 			);
 		};
 /* End PBXProject section */
@@ -225,9 +225,9 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = UnflowReactNativeSdk;
+				PRODUCT_NAME = UnflowReactNative;
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "UnflowReactNativeSdk-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "UnflowReactNative-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
@@ -244,9 +244,9 @@
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = UnflowReactNativeSdk;
+				PRODUCT_NAME = UnflowReactNative;
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "UnflowReactNativeSdk-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "UnflowReactNative-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -254,7 +254,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "UnflowReactNativeSdk" */ = {
+		58B511D61A9E6C8500147676 /* Build configuration list for PBXProject "UnflowReactNative" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				58B511ED1A9E6C8500147676 /* Debug */,
@@ -263,7 +263,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "UnflowReactNativeSdk" */ = {
+		58B511EF1A9E6C8500147676 /* Build configuration list for PBXNativeTarget "UnflowReactNative" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				58B511F01A9E6C8500147676 /* Debug */,
