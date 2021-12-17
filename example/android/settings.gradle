@@ -1,6 +1,6 @@
-rootProject.name = 'UnflowReactNativeExample'
+rootProject.name = 'UnflowReactNativeSdkExample'
 apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
 include ':app'
 
-include ':unflowreactnative'
-project(':unflowreactnative').projectDir = new File(rootProject.projectDir, '../../android')
+include ':unflowreactnativesdk'
+project(':unflowreactnativesdk').projectDir = new File(rootProject.projectDir, '../../android')

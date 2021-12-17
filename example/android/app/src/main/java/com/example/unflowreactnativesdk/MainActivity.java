@@ -1,4 +1,4 @@
-package com.unflow.reactnative;
+package com.example.unflowreactnativesdk;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "UnflowReactNativeExample";
+    return "UnflowReactNativeSdkExample";
   }
 }

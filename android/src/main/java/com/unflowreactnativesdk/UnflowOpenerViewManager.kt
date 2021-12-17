@@ -1,4 +1,4 @@
-package com.unflow.reactnative
+package com.unflowreactnativesdk
 
 import android.content.Context
 import android.content.res.Resources
