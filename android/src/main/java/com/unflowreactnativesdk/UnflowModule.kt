@@ -2,8 +2,9 @@ package com.unflowreactnativesdk
 
 import com.facebook.react.bridge.*
 import com.unflow.androidsdk.UnflowSdk
+import com.unflow.androidsdk.ui.theme.Fonts
 
-class UnflowModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
+class UnflowModule(private val reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
 
     override fun getName(): String {
         return "Unflow"
@@ -12,7 +13,7 @@ class UnflowModule(reactContext: ReactApplicationContext) : ReactContextBaseJava
     @ReactMethod
     fun initialize(apiKey: String, enableLogging: Boolean) {
       UnflowSdk.initialize(
-        context = reactApplicationContext,
+        context = reactContext,
         config = UnflowSdk.Config(apiKey, enableLogging),
         analyticsListener = null
       )
@@ -30,15 +31,26 @@ class UnflowModule(reactContext: ReactApplicationContext) : ReactContextBaseJava
 
     @ReactMethod
     fun setAttributes(attributes: ReadableMap) {
-      val mappedAttributes = attributes as Map<String, String>
-      UnflowSdk.client().setAttributes(attributes = mappedAttributes)
+      val mappedAttributes = attributes.toHashMap() as? Map<String, String>
+      if (mappedAttributes != null) {
+        UnflowSdk.client().setAttributes(attributes = mappedAttributes)
+      }
     }
 
     @ReactMethod
     fun setCustomFonts(fonts: ReadableMap) {
-//      TODO("Pull font family from assets")
-//      UnflowSdk.client().setCustomFonts(fonts = Fonts(
-//
-//      ))
+      UnflowSdk.client().setCustomFonts(fonts = Fonts(
+          title = fonts.getFontResId("title"),
+          body = fonts.getFontResId("body"),
+          button = fonts.getFontResId("button"),
+          openerTitle = fonts.getFontResId("openerTitle"),
+          openerSubtitle = fonts.getFontResId("openerSubtitle"),
+        )
+      )
+    }
+
+    private fun ReadableMap.getFontResId(key: String): Int? {
+      if (!hasKey(key)) return null
+      return reactContext.resources.getIdentifier(getString(key), "font", reactContext.packageName)
     }
 }
