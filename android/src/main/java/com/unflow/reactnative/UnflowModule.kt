@@ -50,6 +50,17 @@ class UnflowModule(private val reactContext: ReactApplicationContext) : ReactCon
       )
     }
 
+    @ReactMethod
+    fun openScreen(screenId: Double) {
+      UnflowSdk.client().openScreen(screenId = screenId.toLong())
+    }
+
+    @ReactMethod
+    fun trackEvent(eventName: String, metadata: ReadableMap) {
+      val mappedMetadata = metadata.toHashMap() as Map<String, Any?>
+      UnflowSdk.client().trackEvent(eventName, mappedMetadata)
+    }
+
     private fun ReadableMap.getFontResId(key: String): Int? {
       if (!hasKey(key)) return null
       return reactContext.resources.getIdentifier(getString(key), "font", reactContext.packageName)
