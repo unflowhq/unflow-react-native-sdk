@@ -1,4 +1,4 @@
-package com.unflowreactnativesdk
+package com.unflow.reactnative
 
 import android.content.Context
 import android.content.res.Resources
@@ -32,10 +32,20 @@ class UnflowOpenerViewManager : SimpleViewManager<ReactNativeOpenerView>() {
   }
 }
 
-class ReactNativeOpenerView(
+class ReactNativeOpenerView @JvmOverloads constructor(
   context: Context,
-  attrs: AttributeSet? = null
-) : OpenerView(context, attrs) {
+  attrs: AttributeSet? = null,
+  defStyleAttr: Int = 0
+) : AbstractComposeView(context, attrs, defStyleAttr) {
+//class ReactNativeOpenerView(
+//  context: Context,
+//  attrs: AttributeSet? = null
+//) : OpenerView(context, attrs) {
+
+  @Composable
+  override fun Content() {
+    Opener()
+  }
 
   override fun requestLayout() {
     super.requestLayout()

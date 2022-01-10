@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.example.unflowreactnativesdk">
+  package="com.unflow.reactnativeexample">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
