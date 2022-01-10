@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { SafeAreaView, StyleSheet, Text } from 'react-native';
-import Unflow, { OpenerView } from 'unflow-react-native-sdk';
+import Unflow, { OpenerView } from 'unflow-react-native';
 
 export default function App() {
   // Do this as early as possible in your app

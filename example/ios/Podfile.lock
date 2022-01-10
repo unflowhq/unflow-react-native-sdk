@@ -11,7 +11,7 @@ PODS:
     - ReactCommon/turbomodule/core (= 0.66.3)
   - fmt (6.2.1)
   - glog (0.3.5)
-  - Nuke (10.5.2)
+  - Nuke (10.6.1)
   - RCT-Folly (2021.06.28.00-v2):
     - boost
     - DoubleConversion
@@ -279,7 +279,7 @@ PODS:
     - React-perflogger (= 0.66.3)
   - Unflow (1.1.0):
     - Nuke
-  - unflow-react-native-sdk (1.1.0):
+  - unflow-react-native (1.2.0):
     - React-Core
     - Unflow
   - Yoga (1.14.0)
@@ -317,7 +317,7 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
-  - unflow-react-native-sdk (from `../..`)
+  - unflow-react-native (from `../..`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -387,7 +387,7 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/runtimeexecutor"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
-  unflow-react-native-sdk:
+  unflow-react-native:
     :path: "../.."
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
@@ -399,7 +399,7 @@ SPEC CHECKSUMS:
   FBReactNativeSpec: 6192956c9e346013d5f1809ba049af720b11c6a4
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 5337263514dd6f09803962437687240c5dc39aa4
-  Nuke: 62d6d401e2b3ce553151a6f5e2f9332878710fbd
+  Nuke: 3ca210aee6d90756605c5125cbe40569fd9c06f7
   RCT-Folly: a21c126816d8025b547704b777a2ba552f3d9fa9
   RCTRequired: 59d2b744d8c2bf2d9bc7032a9f654809adcf7d50
   RCTTypeSafety: d0aaf7ccae5c70a4aaa3a5c3e9e0db97efae760e
@@ -426,9 +426,9 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: bbbdb3d8fcf327c6e2249ee71b6ef1764b7dc266
   ReactCommon: 9bac022ab71596f2b0fde1268272543184c63971
   Unflow: 1900268a430cf0318a528e7801bd5f5b1239fd7b
-  unflow-react-native-sdk: 079d0844da459e3d9ddc668501f098e2fc553690
+  unflow-react-native: f5f98342fde7e7089d21190e9b0d5663edc69d87
   Yoga: 32a18c0e845e185f4a2a66ec76e1fd1f958f22fa
 
-PODFILE CHECKSUM: 2f7e7ee6a7ffc4e29a2a92b4aab09152af82ed23
+PODFILE CHECKSUM: 08953813be6211970511c7bdbc2c566f6e209dae
 
 COCOAPODS: 1.11.2
