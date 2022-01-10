@@ -12,12 +12,12 @@ class UnflowModule(private val reactContext: ReactApplicationContext) : ReactCon
 
     @ReactMethod
     fun initialize(apiKey: String, enableLogging: Boolean) {
-//      val application = currentActivity!!.application
-//      UnflowSdk.initialize(
-//        application = application,
-//        config = UnflowSdk.Config(apiKey, enableLogging),
-//        analyticsListener = null
-//      )
+      val application = currentActivity!!.application
+      UnflowSdk.initialize(
+        application = application,
+        config = UnflowSdk.Config(apiKey, enableLogging),
+        analyticsListener = null
+      )
     }
 
     @ReactMethod
