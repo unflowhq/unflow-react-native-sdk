@@ -277,9 +277,9 @@ PODS:
     - React-jsi (= 0.66.3)
     - React-logger (= 0.66.3)
     - React-perflogger (= 0.66.3)
-  - Unflow (1.1.0):
+  - Unflow (1.2.0):
     - Nuke
-  - unflow-react-native (1.2.0):
+  - unflow-react-native (1.1.0):
     - React-Core
     - Unflow
   - Yoga (1.14.0)
@@ -425,8 +425,8 @@ SPEC CHECKSUMS:
   React-RCTVibration: 50cfe7049167cfc7e83ac5542c6fff0c76791a9b
   React-runtimeexecutor: bbbdb3d8fcf327c6e2249ee71b6ef1764b7dc266
   ReactCommon: 9bac022ab71596f2b0fde1268272543184c63971
-  Unflow: 1900268a430cf0318a528e7801bd5f5b1239fd7b
-  unflow-react-native: f5f98342fde7e7089d21190e9b0d5663edc69d87
+  Unflow: 7f14f7b4e36b791f0b452dd882127097f2fa2544
+  unflow-react-native: 54dea19fa4e4fae324055d9ce921d9d5d00e1723
   Yoga: 32a18c0e845e185f4a2a66ec76e1fd1f958f22fa
 
 PODFILE CHECKSUM: 08953813be6211970511c7bdbc2c566f6e209dae
