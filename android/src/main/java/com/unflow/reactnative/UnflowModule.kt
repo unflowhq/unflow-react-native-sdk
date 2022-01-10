@@ -1,4 +1,4 @@
-package com.unflowreactnativesdk
+package com.unflow.reactnative
 
 import com.facebook.react.bridge.*
 import com.unflow.androidsdk.UnflowSdk
@@ -12,8 +12,9 @@ class UnflowModule(private val reactContext: ReactApplicationContext) : ReactCon
 
     @ReactMethod
     fun initialize(apiKey: String, enableLogging: Boolean) {
+      val application = currentActivity!!.application
       UnflowSdk.initialize(
-        context = reactContext,
+        application = application,
         config = UnflowSdk.Config(apiKey, enableLogging),
         analyticsListener = null
       )
