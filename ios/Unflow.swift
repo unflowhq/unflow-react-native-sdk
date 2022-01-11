@@ -2,10 +2,20 @@ import Unflow
 import UnflowUI
 import SwiftUI
 
-class UnflowAnalyticsListener: AnalyticsListener {
-    func onEvent(event: UnflowEvent) {
+class UnflowAnalyticsListener: UnflowUI.AnalyticsListener {
+    func onEvent(event: UnflowUI.UnflowEvent) {
         print("\(event.name) attributes: \(event.attributes)")
     }
+}
+
+class EventMetadata: Codable {}
+
+fileprivate extension Decodable {
+  init(from: Any) throws {
+    let data = try JSONSerialization.data(withJSONObject: from, options: .prettyPrinted)
+    let decoder = JSONDecoder()
+    self = try decoder.decode(Self.self, from: data)
+  }
 }
 
 @objc(Unflow)
@@ -13,10 +23,12 @@ class Unflow: NSObject {
 
     @objc(initialize:withEnableLogging:)
     func initialize(apiKey: String, enableLogging: Bool) -> Void {
-        UnflowSDK.initialize(
-            config: UnflowSDK.Config(apiKey: apiKey, enableLogging: enableLogging),
-            analyticsListener: UnflowAnalyticsListener()
-        )
+        if #available(iOS 13.0, *) {
+            UnflowSDK.initialize(
+                config: UnflowSDK.Config(apiKey: apiKey, enableLogging: enableLogging),
+                analyticsListener: UnflowAnalyticsListener()
+            )
+        }
     }
 
     @objc(sync)
@@ -28,15 +40,19 @@ class Unflow: NSObject {
 
     @objc(setUserId:)
     func setUserId(userId: String) -> Void {
-        UnflowSDK.client.setUserId(userId: userId)
+        if #available(iOS 13.0, *) {
+            UnflowSDK.client.setUserId(userId: userId)
+        }
     }
 
     @objc(setAttributes:)
     func setAttributes(attributes: NSDictionary) -> Void {
-        guard let mappedAttribtues = attributes as? [String: String] else {
-            return
+        if #available(iOS 13.0, *) {
+            guard let mappedAttribtues = attributes as? [String: String] else {
+                return
+            }
+            UnflowSDK.client.setAttributes(attributes: mappedAttribtues)
         }
-        UnflowSDK.client.setAttributes(attributes: mappedAttribtues)
     }
 
     @objc(setCustomFonts:)
@@ -51,6 +67,25 @@ class Unflow: NSObject {
                     openerSubtitle: (fonts["openerSubtitle"] != nil) ? .custom(fonts["openerSubtitle"] as! String, size: 12) : nil
                 )
             )
+        }
+    }
+    
+    @objc(openScreen:)
+    func openScreen(screenId: Double) -> Void {
+        if #available(iOS 13.0, *) {
+            do {
+                try UnflowSDK.client.openScreen(withID: Int(screenId))
+            } catch {}
+        }
+    }
+    
+    @objc(trackEvent:withMetadata:)
+    func trackEvent(eventName: String, metadata: NSDictionary) -> Void {
+        if #available(iOS 13.0, *) {
+            do {
+                let attributes = try EventMetadata(from: metadata)
+                UnflowSDK.client.trackEvent(eventName, attributes: attributes)
+            } catch {}
         }
     }
 
