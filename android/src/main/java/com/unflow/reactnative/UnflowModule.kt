@@ -1,10 +1,14 @@
 package com.unflow.reactnative
 
+import android.app.Application
 import com.facebook.react.bridge.*
 import com.unflow.androidsdk.UnflowSdk
 import com.unflow.androidsdk.ui.theme.Fonts
 
-class UnflowModule(private val reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
+class UnflowModule(
+  private val reactContext: ReactApplicationContext,
+  private val application: Application,
+) : ReactContextBaseJavaModule(reactContext) {
 
     override fun getName(): String {
         return "Unflow"
@@ -12,7 +16,6 @@ class UnflowModule(private val reactContext: ReactApplicationContext) : ReactCon
 
     @ReactMethod
     fun initialize(apiKey: String, enableLogging: Boolean) {
-      val application = currentActivity!!.application
       UnflowSdk.initialize(
         application = application,
         config = UnflowSdk.Config(apiKey, enableLogging),
