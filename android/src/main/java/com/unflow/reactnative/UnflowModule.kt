@@ -39,7 +39,7 @@ class UnflowModule(
     @ReactMethod
     fun setAttributes(attributes: ReadableMap) {
       val attributesMap = attributes.toHashMap() as? Map<String, Any>
-      val stringAttributes = attributesMap?.filterMapValueType(String::class)
+      val stringAttributes = attributesMap?.filterValues { it is String } as? Map<String, String>
       if (stringAttributes != null) {
         UnflowSdk.client().setAttributes(attributes = stringAttributes)
       }
@@ -76,8 +76,4 @@ class UnflowModule(
       if (!hasKey(key)) return null
       return reactContext.resources.getIdentifier(getString(key), "font", reactContext.packageName)
     }
-}
-
-private inline fun <K, V, reified T : Any> Map<K, V>.filterMapValueType(type: KClass<T>): Map<K, T> {
-  return filterValues { type.isInstance(it) }.mapValues { type.cast(it) }
 }
