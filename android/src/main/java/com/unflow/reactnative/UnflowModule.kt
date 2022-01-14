@@ -1,15 +1,16 @@
 package com.unflow.reactnative
 
-import android.app.Application
-import com.facebook.react.bridge.*
+import android.util.Log
+import com.facebook.react.bridge.ReactApplicationContext
+import com.facebook.react.bridge.ReactContextBaseJavaModule
+import com.facebook.react.bridge.ReactMethod
+import com.facebook.react.bridge.ReadableMap
 import com.unflow.androidsdk.UnflowSdk
+import com.unflow.androidsdk.ui.activity.CurrentActivityProvider
 import com.unflow.androidsdk.ui.theme.Fonts
-import kotlin.reflect.KClass
-import kotlin.reflect.cast
 
 class UnflowModule(
   private val reactContext: ReactApplicationContext,
-  private val application: Application,
 ) : ReactContextBaseJavaModule(reactContext) {
 
     override fun getName(): String {
@@ -18,10 +19,17 @@ class UnflowModule(
 
     @ReactMethod
     fun initialize(apiKey: String, enableLogging: Boolean) {
+      val application = currentActivity?.application
+      if (application == null) {
+        Log.e("UNFLOW", "Unable to initialize Unflow as we have no activity :(")
+        return
+      }
       UnflowSdk.initialize(
         application = application,
         config = UnflowSdk.Config(apiKey, enableLogging),
-        analyticsListener = null
+        analyticsListener = null,
+        // TODO: Enable this once we have published 1.2.2
+//        activityProvider = CurrentActivityProvider { currentActivity }
       )
     }
 
@@ -58,7 +66,7 @@ class UnflowModule(
     }
 
     @ReactMethod
-    fun openScreen(screenId: Double) {
+    fun openScreen(screenId: Int) {
       UnflowSdk.client().openScreen(screenId = screenId.toLong())
     }
 
