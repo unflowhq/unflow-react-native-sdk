@@ -1,10 +1,17 @@
 package com.unflow.reactnative
 
-import com.facebook.react.bridge.*
+import android.util.Log
+import com.facebook.react.bridge.ReactApplicationContext
+import com.facebook.react.bridge.ReactContextBaseJavaModule
+import com.facebook.react.bridge.ReactMethod
+import com.facebook.react.bridge.ReadableMap
 import com.unflow.androidsdk.UnflowSdk
+import com.unflow.androidsdk.ui.activity.CurrentActivityProvider
 import com.unflow.androidsdk.ui.theme.Fonts
 
-class UnflowModule(private val reactContext: ReactApplicationContext) : ReactContextBaseJavaModule(reactContext) {
+class UnflowModule(
+  private val reactContext: ReactApplicationContext,
+) : ReactContextBaseJavaModule(reactContext) {
 
     override fun getName(): String {
         return "Unflow"
@@ -12,11 +19,17 @@ class UnflowModule(private val reactContext: ReactApplicationContext) : ReactCon
 
     @ReactMethod
     fun initialize(apiKey: String, enableLogging: Boolean) {
-      val application = currentActivity!!.application
+      val application = currentActivity?.application
+      if (application == null) {
+        Log.e("UNFLOW", "Unable to initialize Unflow as we have no activity :(")
+        return
+      }
       UnflowSdk.initialize(
         application = application,
         config = UnflowSdk.Config(apiKey, enableLogging),
-        analyticsListener = null
+        analyticsListener = null,
+        // TODO: Enable this once we have published 1.2.2
+//        activityProvider = CurrentActivityProvider { currentActivity }
       )
     }
 
@@ -30,11 +43,13 @@ class UnflowModule(private val reactContext: ReactApplicationContext) : ReactCon
       UnflowSdk.client().setUserId(userId = userId)
     }
 
+    @Suppress("UNCHECKED_CAST")
     @ReactMethod
     fun setAttributes(attributes: ReadableMap) {
-      val mappedAttributes = attributes.toHashMap() as? Map<String, String>
-      if (mappedAttributes != null) {
-        UnflowSdk.client().setAttributes(attributes = mappedAttributes)
+      val attributesMap = attributes.toHashMap() as? Map<String, Any>
+      val stringAttributes = attributesMap?.filterValues { it is String } as? Map<String, String>
+      if (stringAttributes != null) {
+        UnflowSdk.client().setAttributes(attributes = stringAttributes)
       }
     }
 
@@ -51,14 +66,18 @@ class UnflowModule(private val reactContext: ReactApplicationContext) : ReactCon
     }
 
     @ReactMethod
-    fun openScreen(screenId: Double) {
+    fun openScreen(screenId: Int) {
       UnflowSdk.client().openScreen(screenId = screenId.toLong())
     }
 
     @ReactMethod
     fun trackEvent(eventName: String, metadata: ReadableMap) {
-      val mappedMetadata = metadata.toHashMap() as Map<String, Any?>
-      UnflowSdk.client().trackEvent(eventName, mappedMetadata)
+      val mappedMetadata = metadata.toHashMap() as? Map<String, Any?>
+      if (mappedMetadata != null) {
+        UnflowSdk.client().trackEvent(eventName, mappedMetadata)
+      } else {
+        UnflowSdk.client().trackEvent(eventName)
+      }
     }
 
     private fun ReadableMap.getFontResId(key: String): Int? {
