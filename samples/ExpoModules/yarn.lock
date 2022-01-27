@@ -7508,11 +7508,6 @@ unbox-primitive@^1.0.1:
     has-symbols "^1.0.2"
     which-boxed-primitive "^1.0.2"
 
-unflow-react-native@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/unflow-react-native/-/unflow-react-native-1.2.2.tgz#c72f2d18e7cd942a6ff1694b48e03582ca0103e5"
-  integrity sha512-OzDr4Wr4d7uIuo23syTDRi1MWiGory3pIdH1YCIw0+Cns40CTF1EqBNZZcIrNtBPGgG2tuU/DI75Az7jASc4+w==
-
 unicode-canonical-property-names-ecmascript@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/unicode-canonical-property-names-ecmascript/-/unicode-canonical-property-names-ecmascript-2.0.0.tgz#301acdc525631670d39f6146e0e77ff6bbdebddc"
