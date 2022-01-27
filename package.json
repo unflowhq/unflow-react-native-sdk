@@ -15,6 +15,7 @@
     "cpp",
     "unflow-react-native.podspec",
     "!lib/typescript/example",
+    "!lib/typescript/samples",
     "!android/build",
     "!ios/build",
     "!**/__tests__",
@@ -75,6 +76,8 @@
     "preset": "react-native",
     "modulePathIgnorePatterns": [
       "<rootDir>/example/node_modules",
+      "<rootDir>/samples/ExpoModules/node_modules",
+      "<rootDir>/samples/ThirdPartySDKs/node_modules",
       "<rootDir>/lib/"
     ]
   },

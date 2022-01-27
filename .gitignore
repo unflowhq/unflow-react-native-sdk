@@ -40,6 +40,8 @@ android.iml
 # Cocoapods
 #
 example/ios/Pods
+samples/ThirdPartySDKs/ios/Pods
+samples/ExpoModules/ios/Pods
 
 # node.js
 #
