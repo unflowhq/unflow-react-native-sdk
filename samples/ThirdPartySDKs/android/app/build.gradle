@@ -83,6 +83,8 @@ project.ext.react = [
 
 apply from: "../../node_modules/react-native/react.gradle"
 apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 /**
  * Set this to true to create two separate APKs instead of one:
