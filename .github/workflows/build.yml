@@ -28,6 +28,8 @@ jobs:
       - name: Install dependencies
         run: |
           yarn install --cwd example --frozen-lockfile
+          yarn install --cwd samples/ExpoModules --frozen-lockfile
+          yarn install --cwd samples/ThirdPartySDKs --frozen-lockfile
           yarn install --frozen-lockfile
 
       - name: Lint files
