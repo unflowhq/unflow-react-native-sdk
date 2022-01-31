@@ -6,7 +6,6 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.ReadableMap
 import com.unflow.androidsdk.UnflowSdk
-// import com.unflow.androidsdk.ui.activity.CurrentActivityProvider
 import com.unflow.androidsdk.ui.theme.Fonts
 
 class UnflowModule(
@@ -28,8 +27,7 @@ class UnflowModule(
         application = application,
         config = UnflowSdk.Config(apiKey, enableLogging),
         analyticsListener = null,
-        // TODO: Enable this once we have published 1.2.2
-        // activityProvider = CurrentActivityProvider { currentActivity }
+        activityProvider = CurrentActivityProvider { currentActivity }
       )
     }
 
