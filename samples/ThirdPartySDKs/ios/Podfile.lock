@@ -395,6 +395,10 @@ PODS:
     - React-Core
     - React-RCTImage
   - SSZipArchive (2.2.3)
+  - Unflow (1.3.0)
+  - unflow-react-native (1.3.0):
+    - React-Core
+    - Unflow
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -461,6 +465,7 @@ DEPENDENCIES:
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - RNScreens (from `../node_modules/react-native-screens`)
+  - unflow-react-native (from `../node_modules/unflow-react-native`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -491,6 +496,7 @@ SPEC REPOS:
     - OpenSSL-Universal
     - PromisesObjC
     - SSZipArchive
+    - Unflow
     - YogaKit
 
 EXTERNAL SOURCES:
@@ -568,6 +574,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-firebase/app"
   RNScreens:
     :path: "../node_modules/react-native-screens"
+  unflow-react-native:
+    :path: "../node_modules/unflow-react-native"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -635,6 +643,8 @@ SPEC CHECKSUMS:
   RNFBApp: 7777c22386149f3845f1b0ca74e3d69a574559c5
   RNScreens: d6da2b9e29cf523832c2542f47bf1287318b1868
   SSZipArchive: 62d4947b08730e4cda640473b0066d209ff033c9
+  Unflow: 79bcccea1bb760fe9dfee00856b1f15030cd245a
+  unflow-react-native: 890952cc1865bee4995730cde3f73afb7bc8e716
   Yoga: 5cbf25add73edb290e1067017690f7ebf56c5468
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
