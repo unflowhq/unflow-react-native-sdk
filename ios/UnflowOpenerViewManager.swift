@@ -58,6 +58,7 @@ class ReactNativeOpenerView : UIView {
         addSubview(openerViewController.view)
         openerViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         openerViewController.view.frame = bounds
+        openerViewController.view.backgroundColor = UIColor.clear
         openerViewController.didMove(toParent: parentVC)
         self.openerViewController = openerViewController
     }
