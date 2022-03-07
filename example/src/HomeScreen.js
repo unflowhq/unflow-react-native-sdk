@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { StyleSheet, View, RefreshControl } from 'react-native';
+import { StyleSheet, RefreshControl, ScrollView } from 'react-native';
 import Unflow from 'unflow-react-native';
 import { OpenerView } from 'unflow-react-native';
+import EventList from './EventList';
+import ManualList from './ManualList';
 import Section from './Section';
 
 export default function HomeScreen() {
@@ -14,7 +16,7 @@ export default function HomeScreen() {
   }, []);
 
   return (
-    <View
+    <ScrollView
       style={styles.container}
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
@@ -23,8 +25,13 @@ export default function HomeScreen() {
       <Section title="Banner stack">
         <OpenerView />
       </Section>
-      <Section title="Demo other content">Content</Section>
-    </View>
+      <Section title="Demo other content">
+        <ManualList />
+      </Section>
+      <Section>
+        <EventList />
+      </Section>
+    </ScrollView>
   );
 }
 

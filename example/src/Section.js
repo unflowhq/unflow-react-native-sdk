@@ -4,7 +4,7 @@ import { View, StyleSheet, Text } from 'react-native';
 export default function Section({ title, children }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{title}</Text>
+      {title && <Text style={styles.title}>{title}</Text>}
       {children}
     </View>
   );
