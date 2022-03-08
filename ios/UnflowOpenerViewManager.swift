@@ -27,7 +27,7 @@ class ReactNativeOpenerView : UIView {
 
     @objc var onHeightSet: RCTDirectEventBlock?
 
-    weak var openerViewController: SelfSizingHostingController<OpenerView>?
+    weak var openerViewController: SelfSizingHostingController<OpenerView<OpenerHost<OpenerRail<OpenerBanner>>, OpenerBanner>>?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
