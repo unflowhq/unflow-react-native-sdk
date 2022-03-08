@@ -4,7 +4,7 @@ package = JSON.parse(File.read(File.join(__dir__, "package.json")))
 
 Pod::Spec.new do |s|
   s.name = "unflow-react-native"
-  s.version = package["version"]
+  s.version = "1.5.1"
   s.summary = package["description"]
   s.homepage = package["homepage"]
   s.license = package["license"]
