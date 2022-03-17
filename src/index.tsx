@@ -1,8 +1,8 @@
 import { NativeModules } from 'react-native';
-import OpenerView from './opener-view';
+import OpenerView, { useSpace } from './opener-view';
 import type { UnflowType } from './types';
 
 const { Unflow } = NativeModules;
 
-export { OpenerView };
+export { OpenerView, useSpace };
 export default Unflow as UnflowType;

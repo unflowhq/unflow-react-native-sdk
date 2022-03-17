@@ -10,17 +10,13 @@ export default function App() {
   Unflow.setCustomFonts({ button: 'shadowsintolight_regular' });
   Unflow.setAttributes({ name: 'Joe Bloggs' });
 
-  let [showOpener, setShowOpener] = React.useState(true);
-
-  let syncUnflow = () => Unflow.sync();
+  let sync = () => Unflow.sync();
 
   return (
     <SafeAreaView style={styles.container}>
       <Text>Before meem</Text>
-      {showOpener && <OpenerView subscriptionId={'default'} />}
-      <Button onPress={syncUnflow} title="Sync" />
-      <Button onPress={() => setShowOpener(true)} title="Add Opener" />
-      <Button onPress={() => setShowOpener(false)} title="Remove Opener" />
+      <OpenerView />
+      <Button onPress={sync} title="Sync" />
     </SafeAreaView>
   );
 }

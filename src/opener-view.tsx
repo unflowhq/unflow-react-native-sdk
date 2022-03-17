@@ -1,34 +1,69 @@
-import React, { ReactElement, useEffect, useState } from 'react';
-import { Text } from 'react-native';
+import React, { ReactElement, useCallback, useEffect, useState } from 'react';
+import type { EmitterSubscription } from 'react-native';
+import DefaultOpenerView from './default-opener-view';
 import { EventEmitter, subscribe } from './native-emitter';
+import type { Opener, UnflowOpenerViewType } from './types';
 
-type Opener = {
-  id: number;
-  title: String;
-  priority: number;
-  subtitle: String;
-  imageURL: String;
+type NativeOpenerChangedEvent = {
+  [key: string]: [Opener];
 };
 
-export default function OpenerView({ subscriptionId }): ReactElement {
-  let [openers, setOpeners] = useState<[Opener?]>([]);
+const OpenerView: React.FC<UnflowOpenerViewType> = ({
+  subscriptionId = 'default',
+  children,
+}): ReactElement => {
+  let [openers, setOpeners] = useState<[Opener] | []>([]);
 
-  let onOpenersChanged = (event: [Opener]) => {
-    setOpeners(event[subscriptionId]);
-  };
+  let onOpenersChanged = useCallback(
+    (event: NativeOpenerChangedEvent) => {
+      setOpeners(event[subscriptionId]);
+    },
+    [subscriptionId]
+  );
 
   useEffect(() => {
-    const subscription = EventEmitter.addListener(
-      'OpenersChanged',
-      onOpenersChanged
-    );
-    subscribe(subscriptionId);
+    let subscription: EmitterSubscription;
+    if (EventEmitter) {
+      subscription = EventEmitter.addListener(
+        'OpenersChanged',
+        onOpenersChanged
+      );
+      subscribe(subscriptionId);
+    }
     return () => {
-      if (subscription) {
-        subscription.remove();
-      }
+      if (subscription) subscription.remove();
     };
-  }, [subscriptionId]);
+  }, [subscriptionId, onOpenersChanged]);
 
-  return <Text>{openers.length}</Text>;
-}
+  return <DefaultOpenerView openers={openers}>{children}</DefaultOpenerView>;
+};
+
+const useSpace = (subscriptionId: string = 'default') => {
+  let [openers, setOpeners] = useState<[Opener] | []>([]);
+
+  let onOpenersChanged = useCallback(
+    (event: NativeOpenerChangedEvent) => {
+      setOpeners(event[subscriptionId]);
+    },
+    [subscriptionId]
+  );
+
+  useEffect(() => {
+    let subscription: EmitterSubscription;
+    if (EventEmitter) {
+      subscription = EventEmitter.addListener(
+        'OpenersChanged',
+        onOpenersChanged
+      );
+      subscribe(subscriptionId);
+    }
+    return () => {
+      if (subscription) subscription.remove();
+    };
+  }, [subscriptionId, onOpenersChanged]);
+
+  return openers;
+};
+
+export default OpenerView;
+export { useSpace };

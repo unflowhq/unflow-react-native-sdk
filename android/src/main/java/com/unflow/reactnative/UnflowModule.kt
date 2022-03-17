@@ -1,19 +1,18 @@
 package com.unflow.reactnative
 
 import android.util.Log
-import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.bridge.ReactContextBaseJavaModule
-import com.facebook.react.bridge.ReactMethod
-import com.facebook.react.bridge.ReadableMap
+import com.facebook.react.bridge.*
 import com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter
 import com.unflow.androidsdk.UnflowSdk
 import com.unflow.androidsdk.ui.theme.Fonts
-import kotlinx.coroutines.flow.map
-
+import kotlinx.coroutines.*
 
 class UnflowModule(
   private val reactContext: ReactApplicationContext,
+  private val scope: CoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
 ) : ReactContextBaseJavaModule(reactContext) {
+
+  private var openerJobs: MutableSet<Job> = mutableSetOf()
 
     override fun getName(): String {
         return "Unflow"
@@ -26,12 +25,14 @@ class UnflowModule(
         Log.e("UNFLOW", "Unable to initialize Unflow as we have no activity :(")
         return
       }
-      UnflowSdk.initialize(
-        application = application,
-        config = UnflowSdk.Config(apiKey, enableLogging),
-        analyticsListener = null,
-        activityProvider = CurrentActivityProvider { currentActivity }
-      )
+      if (!UnflowSdk.isInitialized) {
+        UnflowSdk.initialize(
+          application = application,
+          config = UnflowSdk.Config(apiKey, enableLogging),
+          analyticsListener = null,
+          activityProvider = CurrentActivityProvider { currentActivity }
+        )
+      }
     }
 
     @ReactMethod
@@ -82,29 +83,41 @@ class UnflowModule(
     }
 
     @ReactMethod
-    fun addListener(eventName: String?) {
-      Log.e("UNFLOW LISTENER", "Listener added")
-      Log.e("UNFLOW LISTENER", eventName as String)
-    }
+    fun addListener(eventName: String) {}
 
     @ReactMethod
-    fun removeListeners(eventName: String?) {
-      Log.e("UNFLOW LISTENER", "Listener removed")
-      val me = 33
+    fun removeListeners(count: Int) {
+      if (count == 0) {
+        openerJobs.forEach { it.cancel() }
+      }
+      openerJobs.clear()
     }
 
     @ReactMethod
     fun subscribe(subscriptionId: String) {
+      val job = scope.launch {
+        UnflowSdk.client().openers().collect {
+          val openerList = WritableNativeArray()
 
-      UnflowSdk.client().openers().map {
-//        val params = Arguments.createMap()
-//        params.putString("eventProperty", "someValue")
+          it.forEach {
+            val map = WritableNativeMap()
+            map.putInt("id", it.screenId.toInt())
+            map.putString("title", it.title)
+            map.putInt("priority", it.priority)
+            map.putString("subtitle", it.subtitle)
+            map.putString("imageURL", it.imageUrl)
+            openerList.pushMap(map)
+          }
 
-        val data = listOf(1, 2, 3)
-        reactContext
-          .getJSModule(RCTDeviceEventEmitter::class.java)
-          .emit("OpenersChanged", data)
+          val arguments = Arguments.createMap()
+          arguments.putArray(subscriptionId, openerList)
+
+          reactContext
+            .getJSModule(RCTDeviceEventEmitter::class.java)
+            .emit("OpenersChanged", arguments)
+        }
       }
+      openerJobs.add(job)
     }
 
     private fun ReadableMap.getFontResId(key: String): Int? {
