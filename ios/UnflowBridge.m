@@ -9,5 +9,6 @@ RCT_EXTERN_METHOD(setAttributes:(NSDictionary *)attributes)
 RCT_EXTERN_METHOD(setCustomFonts:(NSDictionary *)fonts)
 RCT_EXTERN_METHOD(openScreen:(double *)screenId)
 RCT_EXTERN_METHOD(trackEvent:(NSString *)eventName withMetadata:(NSDictionary *)metadata)
+RCT_EXTERN_METHOD(subscribe:(NSString *)subscriptionId)
 
 @end

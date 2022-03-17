@@ -1,6 +1,9 @@
-#import <React/RCTViewManager.h>
-@interface RCT_EXTERN_MODULE(UnflowOpenerViewManager, RCTViewManager)
+#import <Foundation/Foundation.h>
+#import <React/RCTBridgeModule.h>
+#import <React/RCTEventEmitter.h>
 
-RCT_EXPORT_VIEW_PROPERTY(onHeightSet, RCTDirectEventBlock)
+@interface RCT_EXTERN_MODULE(UnflowEventEmitter, RCTEventEmitter)
+
+RCT_EXTERN_METHOD(supportedEvents)
 
 @end

@@ -1,18 +1,34 @@
-import React, { ReactElement, useState } from 'react';
-import { StyleSheet } from 'react-native';
-import Opener from './native-opener';
+import React, { ReactElement, useEffect, useState } from 'react';
+import { Text } from 'react-native';
+import { EventEmitter, subscribe } from './native-emitter';
 
-export default function OpenerView(): ReactElement {
-  const [height, setHeight] = useState(0);
+type Opener = {
+  id: number;
+  title: String;
+  priority: number;
+  subtitle: String;
+  imageURL: String;
+};
 
-  return (
-    <Opener
-      style={[styles.opener, { height }]}
-      onHeightSet={({ nativeEvent }) => setHeight(nativeEvent.height)}
-    />
-  );
+export default function OpenerView({ subscriptionId }): ReactElement {
+  let [openers, setOpeners] = useState<[Opener?]>([]);
+
+  let onOpenersChanged = (event: [Opener]) => {
+    setOpeners(event[subscriptionId]);
+  };
+
+  useEffect(() => {
+    const subscription = EventEmitter.addListener(
+      'OpenersChanged',
+      onOpenersChanged
+    );
+    subscribe(subscriptionId);
+    return () => {
+      if (subscription) {
+        subscription.remove();
+      }
+    };
+  }, [subscriptionId]);
+
+  return <Text>{openers.length}</Text>;
 }
-
-const styles = StyleSheet.create({
-  opener: { width: '100%' },
-});
