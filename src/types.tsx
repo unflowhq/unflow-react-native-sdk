@@ -1,8 +1,20 @@
-import type { ViewStyle } from 'react-native';
+export type Opener = {
+  id: number;
+  title: string;
+  priority: number;
+  subtitle: string;
+  imageURL: string;
+};
 
-export type OpenerType = {
-  style?: [ViewStyle, { height: number }];
-  onHeightSet?: (event: { nativeEvent: { height: number } }) => void;
+export type UnflowOpenerViewType = {
+  subscriptionId?: string;
+  children?: ({
+    opener,
+    numOpeners,
+  }: {
+    opener: Opener;
+    numOpeners: number;
+  }) => {};
 };
 
 export type UnflowType = {

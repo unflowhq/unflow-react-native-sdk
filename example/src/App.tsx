@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { SafeAreaView, StyleSheet, Text } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, Button } from 'react-native';
 import Unflow, { OpenerView } from 'unflow-react-native';
 
 export default function App() {
@@ -10,11 +10,13 @@ export default function App() {
   Unflow.setCustomFonts({ button: 'shadowsintolight_regular' });
   Unflow.setAttributes({ name: 'Joe Bloggs' });
 
+  let sync = () => Unflow.sync();
+
   return (
     <SafeAreaView style={styles.container}>
       <Text>Before meem</Text>
       <OpenerView />
-      <Text>After</Text>
+      <Button onPress={sync} title="Sync" />
     </SafeAreaView>
   );
 }

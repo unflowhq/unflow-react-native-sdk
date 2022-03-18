@@ -1,10 +1,11 @@
 import Unflow
 import UnflowUI
 import SwiftUI
+import Combine
 
 class UnflowAnalyticsListener: UnflowUI.AnalyticsListener {
     func onEvent(event: UnflowUI.UnflowEvent) {
-        print("\(event.name) attributes: \(event.attributes)")
+        print("\(event.name) metadata: \(event.metadata)")
     }
 }
 
@@ -86,6 +87,29 @@ class Unflow: NSObject {
                 let attributes = try EventMetadata(from: metadata)
                 UnflowSDK.client.trackEvent(eventName, attributes: attributes)
             } catch {}
+        }
+    }
+
+    @objc(subscribe:)
+    func subscribe(subscriptionId: String) -> Void {
+        if #available(iOS 13.0, *) {
+            let publisher = UnflowSDK.client.openers(id: subscriptionId)
+                .sink { openers in
+                    let mappedOpeners = openers.map {
+                        [
+                            "id": $0.id,
+                            "title": $0.title,
+                            "priority": $0.priority,
+                            "subtitle": $0.subtitle,
+                            "imageURL": $0.imageURL,
+                        ]
+                    }
+                    EventEmitter.sharedInstance.dispatch(
+                        name: "OpenersChanged",
+                        body: [subscriptionId: mappedOpeners ]
+                    )
+                }
+            EventEmitter.sharedInstance.store(publisher: publisher)
         }
     }
 
