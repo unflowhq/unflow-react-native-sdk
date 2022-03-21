@@ -83,6 +83,7 @@ class UnflowModule(
     }
 
     @ReactMethod
+    @Suppress("UNUSED_PARAMETER")
     fun addListener(eventName: String) {}
 
     @ReactMethod
