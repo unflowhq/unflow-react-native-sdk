@@ -8,10 +8,12 @@ import {
   ColorSchemeName,
   Dimensions,
   Image,
-  TouchableWithoutFeedback,
+  NativeModules,
+  TouchableOpacity,
 } from 'react-native';
-import Unflow from 'unflow-react-native';
 import type { Opener } from './types';
+
+const { Unflow } = NativeModules;
 
 type DefaultOpenerViewProps = {
   openers: [Opener] | [];
@@ -63,11 +65,16 @@ const DefaultOpenerView: React.FC<DefaultOpenerViewProps> = ({
       >
         {openers.map((opener) => (
           <View key={opener.id} style={[{ width: cardWidth }]}>
-            {children ? (
-              children({ opener, numOpeners: openers.length })
-            ) : (
-              <DefaultCard opener={opener} style={style} />
-            )}
+            <TouchableOpacity
+              activeOpacity={0.9}
+              onPress={() => Unflow.openScreen(opener.id)}
+            >
+              {children ? (
+                children({ opener, numOpeners: openers.length })
+              ) : (
+                <DefaultCard opener={opener} style={style} />
+              )}
+            </TouchableOpacity>
           </View>
         ))}
       </ScrollView>
@@ -80,27 +87,17 @@ type DefaultCardProps = {
   style: 'light' | 'dark';
 };
 
-const DefaultCard: React.FC<DefaultCardProps> = ({ opener, style }) => {
-  let onPress = () => {
-    Unflow.openScreen(opener.id);
-  };
-
-  return (
-    <TouchableWithoutFeedback onPress={onPress}>
-      <View style={[styles.card, cardStyles[style]]}>
-        <Thumnail uri={opener.imageURL} />
-        <View>
-          <Text style={[styles.title, titleStyles[style]]}>
-            {opener?.title}
-          </Text>
-          <Text style={[styles.subtitle, subtitleStyles[style]]}>
-            {opener?.subtitle}
-          </Text>
-        </View>
-      </View>
-    </TouchableWithoutFeedback>
-  );
-};
+const DefaultCard: React.FC<DefaultCardProps> = ({ opener, style }) => (
+  <View style={[styles.card, cardStyles[style]]}>
+    <Thumnail uri={opener.imageURL} />
+    <View>
+      <Text style={[styles.title, titleStyles[style]]}>{opener?.title}</Text>
+      <Text style={[styles.subtitle, subtitleStyles[style]]}>
+        {opener?.subtitle}
+      </Text>
+    </View>
+  </View>
+);
 
 const Thumnail = ({ uri }: { uri?: string }) => {
   if (!uri) return null;
