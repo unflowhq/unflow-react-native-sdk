@@ -25,7 +25,7 @@ class Unflow: NSObject {
     @objc(initialize:withEnableLogging:)
     func initialize(apiKey: String, enableLogging: Bool) -> Void {
         if #available(iOS 13.0, *) {
-            UnflowSDK.initialize(
+            _ = UnflowSDK.initialize(
                 config: UnflowSDK.Config(apiKey: apiKey, enableLogging: enableLogging),
                 analyticsListener: UnflowAnalyticsListener()
             )
@@ -101,8 +101,8 @@ class Unflow: NSObject {
                             "title": $0.title,
                             "priority": $0.priority,
                             "subtitle": $0.subtitle,
-                            "imageURL": $0.imageURL,
-                        ]
+                            "imageURL": $0.imageURL
+                        ] as [String : Any?]
                     }
                     EventEmitter.sharedInstance.dispatch(
                         name: "OpenersChanged",

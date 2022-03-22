@@ -89,12 +89,14 @@ type DefaultCardProps = {
 
 const DefaultCard: React.FC<DefaultCardProps> = ({ opener, style }) => (
   <View style={[styles.card, cardStyles[style]]}>
-    <Thumnail uri={opener.imageURL} />
+    {opener.imageURL && <Thumnail uri={opener.imageURL} />}
     <View>
       <Text style={[styles.title, titleStyles[style]]}>{opener?.title}</Text>
-      <Text style={[styles.subtitle, subtitleStyles[style]]}>
-        {opener?.subtitle}
-      </Text>
+      {opener.subtitle && (
+        <Text style={[styles.subtitle, subtitleStyles[style]]}>
+          {opener.subtitle}
+        </Text>
+      )}
     </View>
   </View>
 );
