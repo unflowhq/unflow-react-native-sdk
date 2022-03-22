@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { SafeAreaView, StyleSheet, Text, Button } from 'react-native';
+import { SafeAreaView, StyleSheet, Button } from 'react-native';
 import Unflow, { OpenerView } from 'unflow-react-native';
 
 export default function App() {
@@ -14,7 +14,6 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Before meem</Text>
       <OpenerView />
       <Button onPress={sync} title="Sync" />
     </SafeAreaView>
