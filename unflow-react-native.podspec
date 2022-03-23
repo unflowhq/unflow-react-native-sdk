@@ -16,5 +16,5 @@ Pod::Spec.new do |s|
   s.source_files = "ios/**/*.{h,m,mm,swift}"
 
   s.dependency "React-Core"
-  s.dependency "Unflow", :git => "https://github.com/unflowhq/unflow-ios-sdk", :tag => "v1.6.2"
+  s.dependency "Unflow", "1.6.2"
 end
