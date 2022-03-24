@@ -1,13 +1,34 @@
-import * as React from 'react';
-import { View, Text } from 'react-native';
-import BottomSheet from './Sheet';
-import { LightningIcon, PlusCircleIcon } from './icons';
+import React, { useEffect, useState } from 'react';
+import { View } from 'react-native';
 import List from './List';
+import Unflow from 'unflow-react-native';
+import { LightningIcon, PlusCircleIcon } from './icons';
 
-export default function ManualList() {
+export default function ManualList({ screens, onAdd }) {
+  let [data, setData] = useState([]);
+
+  useEffect(() => {
+    let mappedScreens = screens.map((screen) => {
+      return {
+        title: screen.title,
+        description: screen.key,
+        key: screen.key,
+        Icon: LightningIcon,
+      };
+    });
+    mappedScreens.push({
+      title: 'Add “Manual” content',
+      description: 'Preview content that’s manually added in code',
+      style: 'action',
+      key: 'create',
+      Icon: PlusCircleIcon,
+    });
+    setData(mappedScreens);
+  }, [screens]);
+
   let onPress = (key) => {
     if (key === 'create') {
-      // Open sheet
+      onAdd();
     } else {
       Unflow.openScreen(key);
     }
@@ -15,27 +36,7 @@ export default function ManualList() {
 
   return (
     <View>
-      <BottomSheet>
-        <Text>Hello</Text>
-      </BottomSheet>
-      <List
-        data={[
-          {
-            title: 'Hello',
-            description: 'Mine',
-            key: 'magicEvent',
-            Icon: LightningIcon,
-          },
-          {
-            title: 'Add “Manual” content',
-            description: 'Preview content that’s manually added in code',
-            style: 'action',
-            key: 'create',
-            Icon: PlusCircleIcon,
-          },
-        ]}
-        onPress={onPress}
-      />
+      <List data={data} onPress={onPress} />
     </View>
   );
 }

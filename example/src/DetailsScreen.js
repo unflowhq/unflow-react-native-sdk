@@ -1,44 +1,79 @@
 import * as React from 'react';
-import { SafeAreaView, View, StyleSheet, FlatList, Text } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  FlatList,
+  Text,
+  TouchableOpacity,
+  Linking,
+} from 'react-native';
+import {
+  Book,
+  Bug,
+  Bulb,
+  Comment,
+  LinkedIn,
+  Share,
+  Twitter,
+  UnflowMark,
+} from './icons';
 import Section from './Section';
 
 const LINKS_DATA = [
   {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+    id: 'docs',
     title: 'Technical documentation',
+    icon: Book,
+    external: true,
+    url: 'https://docs.unflow.com',
   },
   {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
+    id: 'chat',
     title: 'Chat with the team',
+    icon: Comment,
+    url: 'mailto:team@unflow.com',
   },
   {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
+    id: 'feature',
     title: 'Feature request',
+    icon: Bulb,
+    url: 'mailto:team@unflow.com',
   },
   {
-    id: '58694a0f-3da1-471f-bd96-145571e29d75',
+    id: 'bug',
     title: 'Report a bug',
+    icon: Bug,
+    url: 'mailto:team@unflow.com',
   },
 ];
 
 const SOCIAL_DATA = [
   {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+    id: 'website',
     title: 'Website',
+    icon: UnflowMark,
+    external: true,
+    url: 'https://unflow.com',
   },
   {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
+    id: 'twitter',
     title: 'Twitter',
+    icon: Twitter,
+    external: true,
+    url: 'https://twitter.com/unflowhq',
   },
   {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
+    id: 'linkedin',
     title: 'LinkedIn',
+    icon: LinkedIn,
+    external: true,
+    url: 'https://www.linkedin.com/company/65640038',
   },
 ];
 
 export default function SettingsScreen() {
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <Section title="Useful links">
         <View style={styles.list}>
           <FlatList
@@ -57,18 +92,44 @@ export default function SettingsScreen() {
           />
         </View>
       </Section>
-    </SafeAreaView>
+    </View>
   );
 }
 
-const ListItem = ({ item }) => (
-  <View style={styles.listItem}>
-    <Text>{item.title}</Text>
-  </View>
-);
+const ListItem = ({ item }) => {
+  const onPress = async () => {
+    let supported = await Linking.canOpenURL(item.url);
+    if (supported) {
+      await Linking.openURL(item.url);
+    } else {
+      Alert.alert(`Don't know how to open this URL: ${url}`);
+    }
+  };
+
+  return (
+    <TouchableOpacity onPress={onPress} style={styles.listItem}>
+      <View style={styles.listItemDescription}>
+        <item.icon style={styles.icon} />
+        <Text>{item.title}</Text>
+      </View>
+      {item.external && <Share style={styles.share} />}
+    </TouchableOpacity>
+  );
+};
 
 const styles = StyleSheet.create({
-  container: { marginVertical: 16 },
+  container: { flex: 1, paddingVertical: 16, backgroundColor: '#FAFAFA' },
   list: { marginHorizontal: 16, backgroundColor: 'white', borderRadius: 16 },
-  listItem: { paddingVertical: 12, paddingHorizontal: 16 },
+  listItem: {
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  listItemDescription: {
+    flexDirection: 'row',
+  },
+  icon: { width: 20, height: 20, marginRight: 8, color: 'black' },
+  share: { width: 20, height: 20, color: '#D4D4D8' },
 });

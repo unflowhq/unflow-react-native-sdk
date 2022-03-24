@@ -1,19 +1,35 @@
-import * as React from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { StyleSheet, RefreshControl, ScrollView } from 'react-native';
 import Unflow from 'unflow-react-native';
 import { OpenerView } from 'unflow-react-native';
+import { getData } from '../lib/storage';
 import EventList from './EventList';
 import ManualList from './ManualList';
 import Section from './Section';
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
+  let [data, setData] = useState({ screens: [], events: [] });
   const [refreshing, setRefreshing] = React.useState(false);
 
-  const onRefresh = React.useCallback(() => {
+  const onRefresh = useCallback(() => {
     setRefreshing(true);
     Unflow.sync();
     setTimeout(() => setRefreshing(false), 750);
   }, []);
+
+  let refreshData = async () => {
+    let data = await getData();
+    setData(data);
+  };
+
+  useEffect(refreshData, []);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('blur', refreshData);
+    return unsubscribe;
+  }, [navigation]);
+
+  console.log(data);
 
   return (
     <ScrollView
@@ -26,10 +42,16 @@ export default function HomeScreen() {
         <OpenerView />
       </Section>
       <Section title="Demo other content">
-        <ManualList />
+        <ManualList
+          screens={data.screens}
+          onAdd={() => navigation.navigate('ManualModal')}
+        />
       </Section>
       <Section>
-        <EventList />
+        <EventList
+          events={data.events}
+          onAdd={() => navigation.navigate('EventModal')}
+        />
       </Section>
     </ScrollView>
   );

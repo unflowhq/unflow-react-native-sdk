@@ -1,20 +1,12 @@
 import * as React from 'react';
-import {
-  View,
-  StyleSheet,
-  FlatList,
-  Text,
-  TouchableOpacity,
-} from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 export default function List({ data, onPress }) {
   return (
     <View style={styles.list}>
-      <FlatList
-        data={data}
-        renderItem={({ item }) => <ListItem item={item} onPress={onPress} />}
-        keyExtractor={(item) => item.id}
-      />
+      {data.map((item) => (
+        <ListItem key={item.key} item={item} onPress={onPress} />
+      ))}
     </View>
   );
 }
