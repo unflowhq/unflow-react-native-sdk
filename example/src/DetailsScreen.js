@@ -6,6 +6,7 @@ import {
   Text,
   TouchableOpacity,
   Linking,
+  Alert,
 } from 'react-native';
 import {
   Book,

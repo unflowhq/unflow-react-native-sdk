@@ -17,9 +17,7 @@ const ShortcutScreen = ({
   let [title, setTitle] = useState('');
   let [key, setKey] = useState(null);
 
-  let add = () => {
-    onComplete(title, key);
-  };
+  let add = () => onComplete(title, key);
 
   return (
     <View style={styles.container}>

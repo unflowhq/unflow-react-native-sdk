@@ -1,15 +1,13 @@
 import * as React from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 
-export default function List({ data, onPress }) {
-  return (
-    <View style={styles.list}>
-      {data.map((item) => (
-        <ListItem key={item.key} item={item} onPress={onPress} />
-      ))}
-    </View>
-  );
-}
+const List = ({ data, onPress }) => (
+  <View style={styles.list}>
+    {data.map((item) => (
+      <ListItem key={item.key} item={item} onPress={onPress} />
+    ))}
+  </View>
+);
 
 const ListItem = ({ item, onPress }) => {
   let style = item.style || 'default';
@@ -36,6 +34,8 @@ const ListItem = ({ item, onPress }) => {
     </TouchableOpacity>
   );
 };
+
+export default List;
 
 const styles = StyleSheet.create({
   container: { marginVertical: 16 },

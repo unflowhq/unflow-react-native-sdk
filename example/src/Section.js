@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 
-export default function Section({ title, children }) {
-  return (
-    <View style={styles.container}>
-      {title && <Text style={styles.title}>{title}</Text>}
-      {children}
-    </View>
-  );
-}
+const Section = ({ title, children }) => (
+  <View style={styles.container}>
+    {title && <Text style={styles.title}>{title}</Text>}
+    {children}
+  </View>
+);
+
+export default Section;
 
 const styles = StyleSheet.create({
   container: { marginBottom: 28 },
