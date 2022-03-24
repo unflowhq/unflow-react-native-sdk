@@ -10,6 +10,7 @@ import ManualModal from './ManualModal';
 import EventModal from './EventModal';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { createStackNavigator } from '@react-navigation/stack';
+import { StyleSheet } from 'react-native';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -22,7 +23,7 @@ export default function App() {
   Unflow.setCustomFonts({ button: 'shadowsintolight_regular' });
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView style={styles.container}>
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{
@@ -64,3 +65,7 @@ const ScreenNavigation = () => (
     <Tab.Screen name="Details" component={DetailsScreen} />
   </Tab.Navigator>
 );
+
+const styles = StyleSheet.create({
+  container: { flex: 1 },
+});

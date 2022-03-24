@@ -17,9 +17,12 @@ export default function HomeScreen({ navigation }) {
     setTimeout(() => setRefreshing(false), 750);
   }, []);
 
-  let refreshData = async () => {
-    let data = await getData();
-    setData(data);
+  let refreshData = () => {
+    async function func() {
+      let response = await getData();
+      setData(response);
+    }
+    func();
   };
 
   useEffect(refreshData, []);
@@ -28,8 +31,6 @@ export default function HomeScreen({ navigation }) {
     const unsubscribe = navigation.addListener('blur', refreshData);
     return unsubscribe;
   }, [navigation]);
-
-  console.log(data);
 
   return (
     <ScrollView

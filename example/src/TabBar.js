@@ -20,7 +20,7 @@ export default function TabBar({ state, descriptors, navigation }) {
   );
 }
 
-const TabOption = ({ navigation, route, isFocused, options }) => {
+const TabOption = ({ navigation, route, isFocused }) => {
   const onPress = () => {
     const event = navigation.emit({
       type: 'tabPress',
@@ -40,12 +40,7 @@ const TabOption = ({ navigation, route, isFocused, options }) => {
       accessibilityRole="button"
       accessibilityState={isFocused ? { selected: true } : {}}
       onPress={onPress}
-      style={{
-        width: 32,
-        height: 32,
-        marginVertical: 16,
-        alignItems: 'center',
-      }}
+      style={styles.option}
     >
       <Icon width={32} height={32} color={isFocused ? '#6366F1' : '#18181B'} />
     </TouchableOpacity>
@@ -73,5 +68,11 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.1,
     shadowRadius: 10,
+  },
+  option: {
+    width: 32,
+    height: 32,
+    marginVertical: 16,
+    alignItems: 'center',
   },
 });
