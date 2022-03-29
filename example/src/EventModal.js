@@ -1,5 +1,5 @@
 import React from 'react';
-import { getData, storeData } from '../lib/storage';
+import { getData, storeData } from '../utils/storage';
 import ShortcutScreen from './ShortcutScreen';
 
 const EventModal = ({ navigation }) => {
