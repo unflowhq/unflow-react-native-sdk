@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { StyleSheet, RefreshControl, ScrollView } from 'react-native';
 import Unflow from 'unflow-react-native';
 import { OpenerView } from 'unflow-react-native';
-import { getData } from '../lib/storage';
+import { getData } from '../utils/storage';
 import EventList from './EventList';
 import ManualList from './ManualList';
 import Section from './Section';
