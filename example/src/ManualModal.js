@@ -5,7 +5,7 @@ import ShortcutScreen from './ShortcutScreen';
 const ManualModal = ({ navigation }) => {
   let onComplete = async (title, screenId) => {
     let data = await getData();
-    data.screens.push({ title, key: screenId });
+    data.screens.push({ title, key: parseInt(screenId, 10) });
     await storeData(data);
     navigation.goBack();
   };

@@ -8,6 +8,7 @@ import {
   Linking,
   Alert,
 } from 'react-native';
+import { storeData } from '../utils/storage';
 import {
   Book,
   Bug,
@@ -73,6 +74,10 @@ const SOCIAL_DATA = [
 ];
 
 export default function SettingsScreen() {
+  let clearStorage = async () => {
+    await storeData({ screens: [], events: [] });
+  };
+
   return (
     <View style={styles.container}>
       <Section title="Useful links">
@@ -93,6 +98,9 @@ export default function SettingsScreen() {
           />
         </View>
       </Section>
+      <TouchableOpacity style={styles.destructiveButton} onPress={clearStorage}>
+        <Text style={styles.destructiveButtonText}>Clear Cache</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -133,4 +141,15 @@ const styles = StyleSheet.create({
   },
   icon: { width: 20, height: 20, marginRight: 8, color: 'black' },
   share: { width: 20, height: 20, color: '#D4D4D8' },
+  destructiveButton: {
+    backgroundColor: '#FACDCD',
+    marginHorizontal: 16,
+    paddingVertical: 12,
+    borderRadius: 32,
+    alignItems: 'center',
+  },
+  destructiveButtonText: {
+    color: '#E80404',
+    fontSize: 16,
+  },
 });
