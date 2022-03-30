@@ -27,7 +27,7 @@ PODS:
     - FirebaseCoreDiagnostics (~> 8.0)
     - GoogleUtilities/Environment (~> 7.7)
     - GoogleUtilities/Logger (~> 7.7)
-  - FirebaseCoreDiagnostics (8.11.0):
+  - FirebaseCoreDiagnostics (8.14.0):
     - GoogleDataTransport (~> 9.1)
     - GoogleUtilities/Environment (~> 7.7)
     - GoogleUtilities/Logger (~> 7.7)
@@ -395,8 +395,8 @@ PODS:
     - React-Core
     - React-RCTImage
   - SSZipArchive (2.2.3)
-  - Unflow (1.3.0)
-  - unflow-react-native (1.3.0):
+  - Unflow (1.6.2)
+  - unflow-react-native (1.6.2):
     - React-Core
     - Unflow
   - Yoga (1.14.0)
@@ -592,7 +592,7 @@ SPEC CHECKSUMS:
   FBReactNativeSpec: ef0ce762fdb37900abb01e008cce5f0ef2cce6b7
   Firebase: 44dd9724c84df18b486639e874f31436eaa9a20c
   FirebaseCore: 2f4f85b453cc8fea4bb2b37e370007d2bcafe3f0
-  FirebaseCoreDiagnostics: 64d9709d804a6c25bd77841371c1fcfd909d5601
+  FirebaseCoreDiagnostics: fd0c8490f34287229c1d6c103d3a55f81ec85712
   Flipper: 30e8eeeed6abdc98edaf32af0cda2f198be4b733
   Flipper-Boost-iOSX: fd1e2b8cbef7e662a122412d7ac5f5bea715403c
   Flipper-DoubleConversion: 57ffbe81ef95306cc9e69c4aa3aeeeeb58a6a28c
@@ -643,11 +643,11 @@ SPEC CHECKSUMS:
   RNFBApp: 7777c22386149f3845f1b0ca74e3d69a574559c5
   RNScreens: d6da2b9e29cf523832c2542f47bf1287318b1868
   SSZipArchive: 62d4947b08730e4cda640473b0066d209ff033c9
-  Unflow: 79bcccea1bb760fe9dfee00856b1f15030cd245a
-  unflow-react-native: 890952cc1865bee4995730cde3f73afb7bc8e716
+  Unflow: 458f9de689ddbd49ebfbf50ab2ce6ca284fde86f
+  unflow-react-native: c3418bd82e7bdd6da339c8cd4fbb526595ca5ebe
   Yoga: 5cbf25add73edb290e1067017690f7ebf56c5468
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
 PODFILE CHECKSUM: 7e459e2d3720f2d97d349a16dc0c1d03aa90872b
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3
