@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { StyleSheet, RefreshControl, ScrollView, Text } from 'react-native';
-import Unflow, { OpenerView, useSpace } from 'unflow-react-native';
+import { StyleSheet, RefreshControl, ScrollView, View } from 'react-native';
+import Unflow, { OpenerView } from 'unflow-react-native';
 import { getData } from '../utils/storage';
+import CustomStack from './CustomStack';
 import EventList from './EventList';
 import ManualList from './ManualList';
 import Section from './Section';
@@ -10,7 +11,6 @@ import VisualOpener from './VisualOpener';
 export default function HomeScreen({ navigation }) {
   let [data, setData] = useState({ screens: [], events: [] });
   const [refreshing, setRefreshing] = React.useState(false);
-  let openers = useSpace();
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -33,8 +33,6 @@ export default function HomeScreen({ navigation }) {
     return unsubscribe;
   }, [navigation]);
 
-  let singleOpener = openers[0];
-
   return (
     <ScrollView
       style={styles.container}
@@ -50,6 +48,9 @@ export default function HomeScreen({ navigation }) {
           {({ opener }) => <VisualOpener opener={opener} />}
         </OpenerView>
       </Section>
+      <Section title="Custom stack">
+        <CustomStack />
+      </Section>
       <Section title="Demo other content">
         <ManualList
           screens={data.screens}
@@ -62,10 +63,16 @@ export default function HomeScreen({ navigation }) {
           onAdd={() => navigation.navigate('EventModal')}
         />
       </Section>
+      <View style={styles.spacer} />
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#FAFAFA', paddingVertical: 16 },
+  container: {
+    flex: 1,
+    backgroundColor: '#FAFAFA',
+    paddingVertical: 16,
+  },
+  spacer: { height: 160 },
 });
