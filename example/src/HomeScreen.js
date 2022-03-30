@@ -1,5 +1,15 @@
 import React, { useEffect, useState, useCallback } from 'react';
+<<<<<<< HEAD
 import { StyleSheet, RefreshControl, ScrollView, View } from 'react-native';
+=======
+import {
+  StyleSheet,
+  RefreshControl,
+  ScrollView,
+  Text,
+  View,
+} from 'react-native';
+>>>>>>> 2874e95 (Custom opener examples)
 import Unflow, { OpenerView } from 'unflow-react-native';
 import { getData } from '../utils/storage';
 import CustomStack from './CustomStack';
