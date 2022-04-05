@@ -1,4 +1,4 @@
-import React, { ReactElement, useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import type { EmitterSubscription } from 'react-native';
 import DefaultOpenerView from './default-opener-view';
 import { EventEmitter, subscribe } from './native-emitter';
@@ -11,8 +11,8 @@ type NativeOpenerChangedEvent = {
 const OpenerView: React.FC<UnflowOpenerViewType> = ({
   subscriptionId = 'default',
   children,
-}): ReactElement => {
-  let [openers, setOpeners] = useState<[Opener] | []>([]);
+}) => {
+  let [openers, setOpeners] = useState<Opener[]>([]);
 
   let onOpenersChanged = useCallback(
     (event: NativeOpenerChangedEvent) => {
@@ -39,7 +39,7 @@ const OpenerView: React.FC<UnflowOpenerViewType> = ({
 };
 
 const useSpace = (subscriptionId: string = 'default') => {
-  let [openers, setOpeners] = useState<[Opener] | []>([]);
+  let [openers, setOpeners] = useState<Opener[]>([]);
 
   let onOpenersChanged = useCallback(
     (event: NativeOpenerChangedEvent) => {

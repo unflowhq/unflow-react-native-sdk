@@ -16,7 +16,7 @@ import type { Opener } from './types';
 const { Unflow } = NativeModules;
 
 type DefaultOpenerViewProps = {
-  openers: [Opener] | [];
+  openers: Opener[];
   children?: ({
     opener,
     numOpeners,
