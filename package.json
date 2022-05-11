@@ -1,6 +1,6 @@
 {
   "name": "unflow-react-native",
-  "version": "1.7.1",
+  "version": "1.7.2",
   "description": "Tired of building the same simple screens over and over again? Empower your product team to create and ship content using the Unflow mobile SDK.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
