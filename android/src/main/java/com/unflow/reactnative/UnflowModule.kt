@@ -123,6 +123,11 @@ class UnflowModule(
 
     private fun ReadableMap.getFontResId(key: String): Int? {
       if (!hasKey(key)) return null
-      return reactContext.resources.getIdentifier(getString(key), "font", reactContext.packageName)
+
+      val fontId = reactContext.resources.getIdentifier(getString(key), "font", reactContext.packageName)
+      if (fontId != 0) return fontId
+
+      val fontsId = reactContext.resources.getIdentifier(getString(key), "fonts", reactContext.packageName)
+      return if (fontsId != 0) fontsId else null
     }
 }
