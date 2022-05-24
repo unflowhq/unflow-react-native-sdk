@@ -18,8 +18,8 @@ const Tab = createBottomTabNavigator();
 export default function App() {
   // Do this as early as possible in your app
   Unflow.initialize('ae469c05ed6d8f7c1d46d12901f661c9', true);
-  Unflow.sync();
   Unflow.setUserId('unflow-mirror_react-native');
+  Unflow.sync();
   Unflow.setCustomFonts({ button: 'shadowsintolight_regular' });
 
   return (
