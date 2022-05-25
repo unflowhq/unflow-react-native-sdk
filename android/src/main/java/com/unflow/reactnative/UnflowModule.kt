@@ -83,6 +83,11 @@ class UnflowModule(
     }
 
     @ReactMethod
+    fun deregisterToken() {
+      UnflowSdk.client().deregisterPushToken()
+    }
+
+    @ReactMethod
     @Suppress("UNUSED_PARAMETER")
     fun addListener(eventName: String) {}
 
