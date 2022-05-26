@@ -31,4 +31,5 @@ export type UnflowType = {
   }): null;
   openScreen(screenId: number): null;
   trackEvent(eventName: string, metadata: { [key: string]: any }): null;
+  deregisterToken(): null;
 };

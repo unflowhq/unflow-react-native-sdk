@@ -90,6 +90,13 @@ class Unflow: NSObject {
         }
     }
 
+    @objc(deregisterToken)
+    func deregisterToken() -> Void {
+        if #available(iOS 13.0, *) {
+            UnflowSDK.client.deregisterToken()
+        }
+    }
+
     @objc(subscribe:)
     func subscribe(subscriptionId: String) -> Void {
         if #available(iOS 13.0, *) {
