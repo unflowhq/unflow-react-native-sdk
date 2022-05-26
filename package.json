@@ -72,6 +72,12 @@
     "react": "*",
     "react-native": "*"
   },
+  "resolutions": {
+    "plist": "^3.0.5",
+    "node-fetch": "^2.6.7",
+    "async": "^2.6.4",
+    "minimist": "^1.2.6"
+  },
   "jest": {
     "preset": "react-native",
     "modulePathIgnorePatterns": [
