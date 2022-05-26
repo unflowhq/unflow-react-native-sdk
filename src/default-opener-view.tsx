@@ -64,18 +64,18 @@ const DefaultOpenerView: React.FC<DefaultOpenerViewProps> = ({
         showsHorizontalScrollIndicator={false}
       >
         {openers.map((opener) => (
-          <View key={opener.id} style={[{ width: cardWidth }]}>
-            <TouchableOpacity
-              activeOpacity={0.9}
-              onPress={() => Unflow.openScreen(opener.id)}
-            >
-              {children ? (
-                children({ opener, numOpeners: openers.length })
-              ) : (
-                <DefaultCard opener={opener} style={style} />
-              )}
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity
+            activeOpacity={0.9}
+            onPress={() => Unflow.openScreen(opener.id)}
+            key={opener.id}
+            style={[{ width: cardWidth, flex: 1 }]}
+          >
+            {children ? (
+              children({ opener, numOpeners: openers.length })
+            ) : (
+              <DefaultCard opener={opener} style={style} />
+            )}
+          </TouchableOpacity>
         ))}
       </ScrollView>
     </View>
@@ -90,10 +90,13 @@ type DefaultCardProps = {
 const DefaultCard: React.FC<DefaultCardProps> = ({ opener, style }) => (
   <View style={[styles.card, cardStyles[style]]}>
     {opener.imageURL && <Thumnail uri={opener.imageURL} />}
-    <View>
+    <View style={styles.content}>
       <Text style={[styles.title, titleStyles[style]]}>{opener?.title}</Text>
       {opener.subtitle && (
-        <Text style={[styles.subtitle, subtitleStyles[style]]}>
+        <Text
+          style={[styles.subtitle, subtitleStyles[style]]}
+          numberOfLines={2}
+        >
           {opener.subtitle}
         </Text>
       )}
@@ -115,7 +118,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     minHeight: 64,
+    flex: 1,
   },
+  content: { flexShrink: 1 },
   title: {
     fontWeight: 'bold',
     fontSize: 14,
