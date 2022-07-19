@@ -119,6 +119,34 @@ class Unflow: NSObject {
         }
     }
 
+    @objc(subscriptions)
+    func subscriptions() -> Void {
+        if #available(iOS 13.0, *) {
+            let publisher = UnflowSDK.client.openers(id: subscriptionId)
+                .sink { subscriptions in
+                    let mappedSubscriptions = subscriptions.map {
+                        return [
+                            "id": $0.id,
+                            "openers": $0.openers.compactMap { opener in
+                                return [
+                                    "id": opener.id,
+                                    "title": opener.title,
+                                    "priority": opener.priority,
+                                    "subtitle": opener.subtitle,
+                                    "imageURL": opener.imageURL
+                                ] as? [String : Any?]
+                            }
+                        ]
+                    }
+                    EventEmitter.sharedInstance.dispatch(
+                        name: "SubscriptionsChanged",
+                        body: [mappedSubscriptions]
+                    )
+                }
+            EventEmitter.sharedInstance.store(publisher: publisher)
+        }
+    }
+
     @objc static func requiresMainQueueSetup() -> Bool {
         return true
     }

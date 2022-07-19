@@ -11,6 +11,7 @@ RCT_EXTERN_METHOD(openScreen:(double *)screenId)
 RCT_EXTERN_METHOD(trackEvent:(NSString *)eventName withMetadata:(NSDictionary *)metadata)
 RCT_EXTERN_METHOD(deregisterToken)
 RCT_EXTERN_METHOD(subscribe:(NSString *)subscriptionId)
+RCT_EXTERN_METHOD(subscriptions)
 RCT_EXTERN_METHOD(addListener:(NSString *)eventName)
 RCT_EXTERN_METHOD(removeListeners:(NSInteger)count)
 
