@@ -11,17 +11,17 @@ import {
   NativeModules,
   TouchableOpacity,
 } from 'react-native';
-import type { Opener } from './types';
+import type { UnflowOpener } from './types';
 
 const { Unflow } = NativeModules;
 
 type DefaultOpenerViewProps = {
-  openers: Opener[];
+  openers: UnflowOpener[];
   children?: ({
     opener,
     numOpeners,
   }: {
-    opener: Opener;
+    opener: UnflowOpener;
     numOpeners: number;
   }) => {};
 };
@@ -83,7 +83,7 @@ const DefaultOpenerView: React.FC<DefaultOpenerViewProps> = ({
 };
 
 type DefaultCardProps = {
-  opener: Opener;
+  opener: UnflowOpener;
   style: 'light' | 'dark';
 };
 

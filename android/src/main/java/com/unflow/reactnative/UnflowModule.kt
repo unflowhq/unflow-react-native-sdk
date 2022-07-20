@@ -100,7 +100,7 @@ class UnflowModule(
     }
 
     @ReactMethod
-    fun subscribe(subscriptionId: String) {
+    fun openers(spaceKey: String) {
       val job = scope.launch {
         UnflowSdk.client().openers().collect {
           val openerList = WritableNativeArray()
@@ -116,11 +116,44 @@ class UnflowModule(
           }
 
           val arguments = Arguments.createMap()
-          arguments.putArray(subscriptionId, openerList)
+          arguments.putArray(spaceKey, openerList)
 
           reactContext
             .getJSModule(RCTDeviceEventEmitter::class.java)
             .emit("OpenersChanged", arguments)
+        }
+      }
+      openerJobs.add(job)
+    }
+
+    @ReactMethod
+    fun spaces() {
+      val job = scope.launch {
+        UnflowSdk.client().spaces().collect {
+          val spaceList = Arguments.createArray()
+
+          it.forEach {
+            val map = WritableNativeMap()
+            map.putInt("spaceKey", it.spaceKey)
+            map.putString("name", it.name)
+
+            val openers = WritableNativeArray()
+            it.openers.forEach {
+              val opener = WritableNativeMap()
+              opener.putInt("id", it.screenId.toInt())
+              opener.putString("title", it.title)
+              opener.putInt("priority", it.priority)
+              opener.putString("subtitle", it.subtitle)
+              opener.putString("imageURL", it.imageUrl)
+              openers.pushMap(opener)
+            }
+            map.putArray("openers", openers)
+            spaceList.pushItem(map)
+          }
+
+          reactContext
+            .getJSModule(RCTDeviceEventEmitter::class.java)
+            .emit("OpenersChanged", spaceList)
         }
       }
       openerJobs.add(job)
