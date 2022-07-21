@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { StyleSheet, RefreshControl, ScrollView, View } from 'react-native';
-import Unflow, { OpenerView } from 'unflow-react-native';
+import Unflow, { OpenerView, SpacesView } from 'unflow-react-native';
 import { getData } from '../utils/storage';
 import CustomStack from './CustomStack';
 import EventList from './EventList';
@@ -40,8 +40,8 @@ export default function HomeScreen({ navigation }) {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
     >
-      <Section title="Banner stack">
-        <OpenerView />
+      <Section>
+        <SpacesView />
       </Section>
       <Section title="Card stack">
         <OpenerView>

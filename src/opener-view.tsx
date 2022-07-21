@@ -16,7 +16,6 @@ const OpenerView: React.FC<UnflowOpenerViewType> = ({
 
   let onOpenersChanged = useCallback(
     (event: NativeOpenerChangedEvent) => {
-      console.log(event[spaceKey]);
       setOpeners(event[spaceKey]);
     },
     [spaceKey]

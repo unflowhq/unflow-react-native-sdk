@@ -134,7 +134,7 @@ class UnflowModule(
 
           it.forEach {
             val map = WritableNativeMap()
-            map.putInt("spaceKey", it.spaceKey)
+            map.putString("spaceKey", it.key)
             map.putString("name", it.name)
 
             val openers = WritableNativeArray()
@@ -148,12 +148,12 @@ class UnflowModule(
               openers.pushMap(opener)
             }
             map.putArray("openers", openers)
-            spaceList.pushItem(map)
+            spaceList.pushMap(map)
           }
 
           reactContext
             .getJSModule(RCTDeviceEventEmitter::class.java)
-            .emit("OpenersChanged", spaceList)
+            .emit("SpacesChanged", spaceList)
         }
       }
       openerJobs.add(job)
