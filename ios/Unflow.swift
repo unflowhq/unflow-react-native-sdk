@@ -96,10 +96,10 @@ class Unflow: NSObject {
         }
     }
 
-    @objc(subscribe:)
-    func subscribe(subscriptionId: String) -> Void {
+    @objc(openers:)
+    func openers(spaceKey: String) -> Void {
         if #available(iOS 13.0, *) {
-            let publisher = UnflowSDK.client.openers(id: subscriptionId)
+            let publisher = UnflowSDK.client.openers(id: spaceKey)
                 .sink { openers in
                     let mappedOpeners = openers.map {
                         [
@@ -112,7 +112,36 @@ class Unflow: NSObject {
                     }
                     EventEmitter.sharedInstance.dispatch(
                         name: "OpenersChanged",
-                        body: [subscriptionId: mappedOpeners ]
+                        body: [spaceKey: mappedOpeners]
+                    )
+                }
+            EventEmitter.sharedInstance.store(publisher: publisher)
+        }
+    }
+
+    @objc(spaces)
+    func spaces() -> Void {
+        if #available(iOS 13.0, *) {
+            let publisher = UnflowSDK.client.spaces()
+                .sink { spaces in
+                    let mappedSpaces = spaces.map {
+                        return [
+                            "spaceKey": $0.key,
+                            "name": $0.name,
+                            "openers": $0.openers.compactMap { opener in
+                                return [
+                                    "id": opener.id,
+                                    "title": opener.title,
+                                    "priority": opener.priority,
+                                    "subtitle": opener.subtitle,
+                                    "imageURL": opener.imageURL
+                                ] as? [String : Any?]
+                            }
+                        ]
+                    }
+                    EventEmitter.sharedInstance.dispatch(
+                        name: "SpacesChanged",
+                        body: mappedSpaces
                     )
                 }
             EventEmitter.sharedInstance.store(publisher: publisher)

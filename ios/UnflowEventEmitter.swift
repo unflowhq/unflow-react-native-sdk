@@ -25,7 +25,7 @@ class UnflowEventEmitter: RCTEventEmitter {
     }
 
     @objc open override func supportedEvents() -> [String] {
-        ["OpenersChanged"]
+        ["OpenersChanged", "SpacesChanged"]
     }
 
     @objc override static func requiresMainQueueSetup() -> Bool {

@@ -1,11 +1,15 @@
 import { NativeModules, Platform, NativeEventEmitter } from 'react-native';
 
 const { UnflowEventEmitter, Unflow } = NativeModules;
-const { subscribe } = Unflow;
+const { openers, spaces } = Unflow;
 
 const EventEmitter = Platform.select({
   ios: new NativeEventEmitter(UnflowEventEmitter),
   android: new NativeEventEmitter(Unflow),
 });
 
-export { EventEmitter, subscribe };
+export {
+  EventEmitter,
+  openers as subscribeToOpeners,
+  spaces as subscribeToSpaces,
+};

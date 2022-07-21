@@ -1,4 +1,11 @@
-export type Opener = {
+export type UnflowSpace = {
+  id: number;
+  spaceKey: string;
+  name: string;
+  openers: UnflowOpener[];
+};
+
+export type UnflowOpener = {
   id: number;
   title: string;
   priority: number;
@@ -7,12 +14,12 @@ export type Opener = {
 };
 
 export type UnflowOpenerViewType = {
-  subscriptionId?: string;
+  spaceKey?: string;
   children?: ({
     opener,
     numOpeners,
   }: {
-    opener: Opener;
+    opener: UnflowOpener;
     numOpeners: number;
   }) => {};
 };

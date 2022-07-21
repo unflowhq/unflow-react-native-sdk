@@ -1,24 +1,24 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import type { EmitterSubscription } from 'react-native';
 import DefaultOpenerView from './default-opener-view';
-import { EventEmitter, subscribe } from './native-emitter';
-import type { Opener, UnflowOpenerViewType } from './types';
+import { EventEmitter, subscribeToOpeners } from './native-emitter';
+import type { UnflowOpener, UnflowOpenerViewType } from './types';
 
 type NativeOpenerChangedEvent = {
-  [key: string]: [Opener];
+  [key: string]: UnflowOpener[];
 };
 
 const OpenerView: React.FC<UnflowOpenerViewType> = ({
-  subscriptionId = 'default',
+  spaceKey = 'default',
   children,
 }) => {
-  let [openers, setOpeners] = useState<Opener[]>([]);
+  let [openers, setOpeners] = useState<UnflowOpener[]>([]);
 
   let onOpenersChanged = useCallback(
     (event: NativeOpenerChangedEvent) => {
-      setOpeners(event[subscriptionId]);
+      setOpeners(event[spaceKey]);
     },
-    [subscriptionId]
+    [spaceKey]
   );
 
   useEffect(() => {
@@ -28,24 +28,24 @@ const OpenerView: React.FC<UnflowOpenerViewType> = ({
         'OpenersChanged',
         onOpenersChanged
       );
-      subscribe(subscriptionId);
+      subscribeToOpeners(spaceKey);
     }
     return () => {
       if (subscription) subscription.remove();
     };
-  }, [subscriptionId, onOpenersChanged]);
+  }, [spaceKey, onOpenersChanged]);
 
   return <DefaultOpenerView openers={openers}>{children}</DefaultOpenerView>;
 };
 
-const useSpace = (subscriptionId: string = 'default') => {
-  let [openers, setOpeners] = useState<Opener[]>([]);
+const useSpace = (spaceKey: string = 'default') => {
+  let [openers, setOpeners] = useState<UnflowOpener[]>([]);
 
   let onOpenersChanged = useCallback(
     (event: NativeOpenerChangedEvent) => {
-      setOpeners(event[subscriptionId]);
+      setOpeners(event[spaceKey]);
     },
-    [subscriptionId]
+    [spaceKey]
   );
 
   useEffect(() => {
@@ -55,12 +55,12 @@ const useSpace = (subscriptionId: string = 'default') => {
         'OpenersChanged',
         onOpenersChanged
       );
-      subscribe(subscriptionId);
+      subscribeToOpeners(spaceKey);
     }
     return () => {
       if (subscription) subscription.remove();
     };
-  }, [subscriptionId, onOpenersChanged]);
+  }, [spaceKey, onOpenersChanged]);
 
   return openers;
 };
