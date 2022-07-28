@@ -6,6 +6,7 @@ import com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEm
 import com.unflow.androidsdk.UnflowSdk
 import com.unflow.androidsdk.ui.theme.Fonts
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.collectLatest
 
 class UnflowModule(
   private val reactContext: ReactApplicationContext,
@@ -102,7 +103,7 @@ class UnflowModule(
     @ReactMethod
     fun openers(spaceKey: String) {
       val job = scope.launch {
-        UnflowSdk.client().openers(spaceKey = spaceKey).collect {
+        UnflowSdk.client().openers(spaceKey = spaceKey).collectLatest {
           val openerList = WritableNativeArray()
 
           it.forEach {
@@ -129,7 +130,7 @@ class UnflowModule(
     @ReactMethod
     fun spaces() {
       val job = scope.launch {
-        UnflowSdk.client().spaces().collect {
+        UnflowSdk.client().spaces().collectLatest {
           val spaceList = Arguments.createArray()
 
           it.forEach {
