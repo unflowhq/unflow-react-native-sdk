@@ -102,7 +102,7 @@ class UnflowModule(
     @ReactMethod
     fun openers(spaceKey: String) {
       val job = scope.launch {
-        UnflowSdk.client().openers().collect {
+        UnflowSdk.client().openers(spaceKey = spaceKey).collect {
           val openerList = WritableNativeArray()
 
           it.forEach {
