@@ -7509,9 +7509,9 @@ unbox-primitive@^1.0.1:
     which-boxed-primitive "^1.0.2"
 
 unflow-react-native@^1.3.0:
-  version "1.6.2"
-  resolved "https://registry.yarnpkg.com/unflow-react-native/-/unflow-react-native-1.6.2.tgz#a61ca9e2fae3bf378655345166cff5e1991fc924"
-  integrity sha512-bYBuFcK3bOvoodHqw/Sb8bvsWSF+Jsj6xiWBz62TFxvfp1gE18HeQGzYEtbCcUSJz9q7DQdFEwOliUG+3Kw7AQ==
+  version "1.10.2"
+  resolved "https://registry.yarnpkg.com/unflow-react-native/-/unflow-react-native-1.10.2.tgz#7e82d1c89762982c79ec33bd3e5f093ac1a663c7"
+  integrity sha512-1Dahej2pmY7VpyPcKWBqwdlYu84sr4iOX0M1AlnfuteZ7fYacMobNgVfxaGQ1ZutzHIW+FxzmwZwyf4y0QZaFw==
 
 unicode-canonical-property-names-ecmascript@^2.0.0:
   version "2.0.0"
