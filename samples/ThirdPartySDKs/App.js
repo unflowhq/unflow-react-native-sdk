@@ -10,12 +10,18 @@ import React from 'react';
 import {Text, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {useFocusEffect} from '@react-navigation/native';
 
 import Unflow from 'unflow-react-native';
 
 const Tab = createBottomTabNavigator();
 
 function HomeScreen() {
+  useFocusEffect(() => {
+    console.log('home');
+    Unflow.trackEvent('Transitioned_Home', {route: 'Home'});
+  });
+
   return (
     <View>
       <Text>Home!</Text>
@@ -24,6 +30,11 @@ function HomeScreen() {
 }
 
 function SettingsScreen() {
+  useFocusEffect(() => {
+    console.log('settings');
+    Unflow.trackEvent('Transitioned_Settings', {route: 'Settings'});
+  });
+
   return (
     <View>
       <Text>Settings!</Text>
@@ -38,11 +49,7 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <Tab.Navigator
-        screenListeners={({route}) => {
-          console.log(route.name);
-          Unflow.trackEvent(`Transitioned_${route.name}`, {route: route.name});
-        }}>
+      <Tab.Navigator>
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Settings" component={SettingsScreen} />
       </Tab.Navigator>
