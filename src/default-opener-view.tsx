@@ -54,21 +54,21 @@ const DefaultOpenerView: React.FC<DefaultOpenerViewProps> = ({
 
   if (openers.length === 0) return null;
   return (
-    <View>
-      <ScrollView
-        horizontal={true}
-        decelerationRate={0}
-        snapToInterval={cardWidth}
-        snapToAlignment="center"
-        scrollEnabled={multipleOpeners}
-        showsHorizontalScrollIndicator={false}
-      >
-        {openers.map((opener) => (
+    <ScrollView
+      horizontal={true}
+      decelerationRate={0}
+      snapToInterval={cardWidth}
+      snapToAlignment="center"
+      scrollEnabled={multipleOpeners}
+      showsHorizontalScrollIndicator={false}
+    >
+      {openers.map((opener) => (
+        <View>
           <TouchableOpacity
             activeOpacity={0.9}
             onPress={() => Unflow.openScreen(opener.id)}
             key={opener.id}
-            style={[{ width: cardWidth, flex: 1 }]}
+            style={[{ width: cardWidth }]}
           >
             {children ? (
               children({ opener, numOpeners: openers.length })
@@ -76,9 +76,9 @@ const DefaultOpenerView: React.FC<DefaultOpenerViewProps> = ({
               <DefaultCard opener={opener} style={style} />
             )}
           </TouchableOpacity>
-        ))}
-      </ScrollView>
-    </View>
+        </View>
+      ))}
+    </ScrollView>
   );
 };
 
