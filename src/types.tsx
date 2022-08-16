@@ -1,3 +1,5 @@
+import type { StyleProp, ViewStyle } from 'react-native';
+
 export type UnflowSpace = {
   id: number;
   spaceKey: string;
@@ -13,8 +15,13 @@ export type UnflowOpener = {
   imageURL: string;
 };
 
+export type UnflowSpacesViewType = {
+  cardStyle?: StyleProp<ViewStyle>;
+};
+
 export type UnflowOpenerViewType = {
   spaceKey?: string;
+  cardStyle?: StyleProp<ViewStyle>;
   children?: ({
     opener,
     numOpeners,

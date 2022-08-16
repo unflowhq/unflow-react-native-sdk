@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { EmitterSubscription, View, Text, StyleSheet } from 'react-native';
 import { EventEmitter, subscribeToSpaces } from './native-emitter';
 import OpenerView from './opener-view';
-import type { UnflowSpace } from './types';
+import type { UnflowSpace, UnflowSpacesViewType } from './types';
 
-const SpacesView: React.FC = () => {
+const SpacesView: React.FC<UnflowSpacesViewType> = ({ cardStyle }) => {
   let [spaces, setSpaces] = useState<UnflowSpace[]>([]);
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const SpacesView: React.FC = () => {
       {spaces.map((space, index) => (
         <View key={space.spaceKey} style={index !== 0 && styles.space}>
           <Text style={styles.title}>{space.name}</Text>
-          <OpenerView spaceKey={space.spaceKey} />
+          <OpenerView spaceKey={space.spaceKey} cardStyle={cardStyle} />
         </View>
       ))}
     </View>

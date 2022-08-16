@@ -10,6 +10,7 @@ type NativeOpenerChangedEvent = {
 
 const OpenerView: React.FC<UnflowOpenerViewType> = ({
   spaceKey = 'default',
+  cardStyle = {},
   children,
 }) => {
   let [openers, setOpeners] = useState<UnflowOpener[]>([]);
@@ -35,7 +36,11 @@ const OpenerView: React.FC<UnflowOpenerViewType> = ({
     };
   }, [spaceKey, onOpenersChanged]);
 
-  return <DefaultOpenerView openers={openers}>{children}</DefaultOpenerView>;
+  return (
+    <DefaultOpenerView openers={openers} cardStyle={cardStyle}>
+      {children}
+    </DefaultOpenerView>
+  );
 };
 
 const useSpace = (spaceKey: string = 'default') => {

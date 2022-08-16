@@ -10,6 +10,8 @@ import {
   Image,
   NativeModules,
   TouchableOpacity,
+  StyleProp,
+  ViewStyle,
 } from 'react-native';
 import type { UnflowOpener } from './types';
 
@@ -17,6 +19,7 @@ const { Unflow } = NativeModules;
 
 type DefaultOpenerViewProps = {
   openers: UnflowOpener[];
+  cardStyle: StyleProp<ViewStyle>;
   children?: ({
     opener,
     numOpeners,
@@ -28,6 +31,7 @@ type DefaultOpenerViewProps = {
 
 const DefaultOpenerView: React.FC<DefaultOpenerViewProps> = ({
   openers,
+  cardStyle,
   children,
 }) => {
   let [appearance, setAppearance] = useState<ColorSchemeName>(
@@ -73,7 +77,11 @@ const DefaultOpenerView: React.FC<DefaultOpenerViewProps> = ({
             {children ? (
               children({ opener, numOpeners: openers.length })
             ) : (
-              <DefaultCard opener={opener} style={style} />
+              <DefaultCard
+                opener={opener}
+                style={style}
+                cardStyle={cardStyle}
+              />
             )}
           </TouchableOpacity>
         </View>
@@ -85,10 +93,15 @@ const DefaultOpenerView: React.FC<DefaultOpenerViewProps> = ({
 type DefaultCardProps = {
   opener: UnflowOpener;
   style: 'light' | 'dark';
+  cardStyle: StyleProp<ViewStyle>;
 };
 
-const DefaultCard: React.FC<DefaultCardProps> = ({ opener, style }) => (
-  <View style={[styles.card, cardStyles[style]]}>
+const DefaultCard: React.FC<DefaultCardProps> = ({
+  opener,
+  style,
+  cardStyle,
+}) => (
+  <View style={[styles.card, cardStyles[style], cardStyle]}>
     {opener.imageURL && <Thumnail uri={opener.imageURL} />}
     <View style={styles.content}>
       <Text style={[styles.title, titleStyles[style]]}>{opener?.title}</Text>
