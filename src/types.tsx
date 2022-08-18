@@ -34,6 +34,7 @@ export type UnflowOpenerViewType = {
 export type UnflowType = {
   initialize(apiKey: string, enableLogging: boolean): null;
   sync(): null;
+  close(): null;
   setUserId(userId: string): null;
   setAttributes({}: { [key: string]: string }): null;
   setCustomFonts({}: {
