@@ -47,6 +47,11 @@ class UnflowModule(
     }
 
     @ReactMethod
+    fun pause() {
+      UnflowSdk.client().pause()
+    }
+
+    @ReactMethod
     fun setUserId(userId: String) {
       UnflowSdk.client().setUserId(userId = userId)
     }
