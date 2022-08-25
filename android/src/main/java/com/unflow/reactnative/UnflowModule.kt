@@ -40,6 +40,16 @@ class UnflowModule(
     fun sync() {
       UnflowSdk.client().sync()
     }
+    
+    @ReactMethod
+    fun close() {
+      UnflowSdk.client().close()
+    }
+
+    @ReactMethod
+    fun pause() {
+      UnflowSdk.client().pause()
+    }
 
     @ReactMethod
     fun setUserId(userId: String) {

@@ -38,6 +38,20 @@ class Unflow: NSObject {
         }
     }
 
+    @objc(close)
+    func close() -> Void {
+        if #available(iOS 13.0, *) {
+            UnflowSDK.client.close()
+        }
+    }
+
+    @objc(pause)
+    func pause() -> Void {
+        if #available(iOS 13.0, *) {
+            UnflowSDK.client.pause()
+        }
+    }
+
     @objc(setUserId:)
     func setUserId(userId: String) -> Void {
         if #available(iOS 13.0, *) {
