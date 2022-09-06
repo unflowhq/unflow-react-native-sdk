@@ -41,7 +41,9 @@ class Unflow: NSObject {
     @objc(close)
     func close() -> Void {
         if #available(iOS 13.0, *) {
-            UnflowSDK.client.close()
+            Task {
+                UnflowSDK.client.close()
+            }
         }
     }
 
