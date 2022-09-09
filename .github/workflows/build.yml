@@ -9,7 +9,7 @@ on:
 jobs:
   build_lint:
     name: Build + Lint
-    runs-on: ubuntu-latest
+    runs-on: macos-11
     steps:
       - uses: actions/checkout@v2
 
@@ -40,3 +40,16 @@ jobs:
 
       - name: Build package
         run: yarn prepare
+
+      - name: Install Pods
+        working-directory: example/ios
+        run: pod install
+
+      - name: Build example iOS app
+        uses: sersoft-gmbh/xcodebuild-action@v2
+        with:
+          workspace: example/ios/UnflowReactNativeExample.xcworkspace
+          scheme: UnflowReactNativeExample
+          configuration: Debug
+          build-settings: CODE_SIGN_IDENTITY="Apple Development" CODE_SIGNING_REQUIRED=NO
+          action: clean build
