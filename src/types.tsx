@@ -31,6 +31,13 @@ export type UnflowOpenerViewType = {
   }) => {};
 };
 
+type Font =
+  | string
+  | {
+      family: string;
+      size: number;
+    };
+
 export type UnflowType = {
   initialize(apiKey: string, enableLogging: boolean): null;
   sync(): null;
@@ -39,11 +46,11 @@ export type UnflowType = {
   setUserId(userId: string): null;
   setAttributes({}: { [key: string]: string }): null;
   setCustomFonts({}: {
-    title?: string;
-    body?: string;
-    button?: string;
-    openerTitle?: string;
-    openerSubtitle?: string;
+    title?: Font;
+    body?: Font;
+    button?: Font;
+    openerTitle?: Font;
+    openerSubtitle?: Font;
   }): null;
   openScreen(screenId: number): null;
   trackEvent(eventName: string, metadata: { [key: string]: any }): null;

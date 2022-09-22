@@ -76,15 +76,28 @@ class Unflow: NSObject {
         if #available(iOS 13.0, *) {
             UnflowSDK.client.setCustomFonts(
                 fonts: .init(
-                    title: (fonts["title"] != nil) ? .custom(fonts["title"] as! String, size: 24) : nil,
-                    body: (fonts["body"] != nil) ? .custom(fonts["body"] as! String, size: 16) : nil,
-                    button: (fonts["button"] != nil) ? .custom(fonts["button"] as! String, size: 16) : nil,
-                    openerTitle: (fonts["openerTitle"] != nil) ? .custom(fonts["openerTitle"] as! String, size: 14) : nil,
-                    openerSubtitle: (fonts["openerSubtitle"] != nil) ? .custom(fonts["openerSubtitle"] as! String, size: 12) : nil
+                    title: convertToFont(font: fonts["title"]),
+                    body: convertToFont(font: fonts["body"]),
+                    button: convertToFont(font: fonts["button"]),
+                    openerTitle: convertToFont(font: fonts["openerTitle"]),
+                    openerSubtitle: convertToFont(font: fonts["openerSubtitle"])
                 )
             )
         }
     }
+    
+    @available(iOS 13.0, *)
+    func convertToFont(font: Any?) -> Font? {
+        if let fontFamily = font as? String {
+            return .custom(fontFamily, size: 24)
+        } else if let fontDictionary = font as? NSDictionary {
+            if let fontString = fontDictionary["family"] as? String, let fontSize = fontDictionary["size"] as? CGFloat {
+                return .custom(fontString, size: fontSize)
+            }
+        }
+        return nil
+    }
+
     
     @objc(openScreen:)
     func openScreen(screenId: Double) -> Void {
