@@ -21,6 +21,9 @@ export default function App() {
   Unflow.setUserId('unflow-mirror_react-native');
   Unflow.sync();
   Unflow.setCustomFonts({ button: 'shadowsintolight_regular' });
+  Unflow.setCustomFonts({
+    button: { family: 'shadowsintolight_regular', size: 26 },
+  });
 
   return (
     <GestureHandlerRootView style={styles.container}>
