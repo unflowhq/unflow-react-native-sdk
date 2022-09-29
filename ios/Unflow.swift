@@ -76,23 +76,23 @@ class Unflow: NSObject {
         if #available(iOS 13.0, *) {
             UnflowSDK.client.setCustomFonts(
                 fonts: .init(
-                    title: convertToFont(font: fonts["title"]),
-                    body: convertToFont(font: fonts["body"]),
-                    button: convertToFont(font: fonts["button"]),
-                    openerTitle: convertToFont(font: fonts["openerTitle"]),
-                    openerSubtitle: convertToFont(font: fonts["openerSubtitle"])
+                    title: convertToFont(font: fonts["title"], defaultSize: 24),
+                    body: convertToFont(font: fonts["body"], defaultSize: 16),
+                    button: convertToFont(font: fonts["button"], defaultSize: 16),
+                    openerTitle: convertToFont(font: fonts["openerTitle"], defaultSize: 14),
+                    openerSubtitle: convertToFont(font: fonts["openerSubtitle"], defaultSize: 12)
                 )
             )
         }
     }
     
     @available(iOS 13.0, *)
-    func convertToFont(font: Any?) -> Font? {
+    func convertToFont(font: Any?, defaultSize: CGFloat) -> UIFont? {
         if let fontFamily = font as? String {
-            return .custom(fontFamily, size: 24)
+            return UIFont(name: fontFamily, size: defaultSize)
         } else if let fontDictionary = font as? NSDictionary {
             if let fontString = fontDictionary["family"] as? String, let fontSize = fontDictionary["size"] as? CGFloat {
-                return .custom(fontString, size: fontSize)
+                return UIFont(name: fontString, size: fontSize)
             }
         }
         return nil
