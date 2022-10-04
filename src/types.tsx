@@ -7,6 +7,11 @@ export type UnflowSpace = {
   openers: UnflowOpener[];
 };
 
+export type UnflowEvent = {
+  name: string;
+  metadata: any[];
+};
+
 export type UnflowOpener = {
   id: number;
   title: string;

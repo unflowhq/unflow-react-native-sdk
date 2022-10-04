@@ -25,11 +25,26 @@ class UnflowEventEmitter: RCTEventEmitter {
     }
 
     @objc open override func supportedEvents() -> [String] {
-        ["OpenersChanged", "SpacesChanged"]
+        EventName.allCases.map(\.key)
     }
 
     @objc override static func requiresMainQueueSetup() -> Bool {
         return true
+    }
+}
+
+@objc enum EventName: Int, CaseIterable {
+    case openersChanged, spacesChanged, eventReceived
+
+    var key: String {
+        switch self {
+        case .openersChanged:
+            return "OpenersChanged"
+        case .spacesChanged:
+            return "SpacesChanged"
+        case .eventReceived:
+            return "EventReceived"
+        }
     }
 }
 

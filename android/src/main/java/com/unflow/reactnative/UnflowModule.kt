@@ -5,6 +5,8 @@ import com.facebook.react.bridge.*
 import com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter
 import com.unflow.androidsdk.UnflowSdk
 import com.unflow.androidsdk.ui.theme.Fonts
+import com.unflow.analytics.AnalyticsListener
+import com.unflow.analytics.domain.model.UnflowEvent
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collectLatest
 
@@ -14,6 +16,7 @@ class UnflowModule(
 ) : ReactContextBaseJavaModule(reactContext) {
 
   private var openerJobs: MutableSet<Job> = mutableSetOf()
+  private var listener: AnalyticsListener = UnflowAnalyticsListener(reactContext)
 
     override fun getName(): String {
         return "Unflow"
@@ -30,7 +33,7 @@ class UnflowModule(
         UnflowSdk.initialize(
           application = application,
           config = UnflowSdk.Config(apiKey, enableLogging),
-          analyticsListener = null,
+          analyticsListener = listener,
           activityProvider = CurrentActivityProvider { currentActivity }
         )
       }
@@ -40,7 +43,7 @@ class UnflowModule(
     fun sync() {
       UnflowSdk.client().sync()
     }
-    
+
     @ReactMethod
     fun close() {
       UnflowSdk.client().close()
@@ -173,10 +176,66 @@ class UnflowModule(
     private fun ReadableMap.getFontResId(key: String): Int? {
       if (!hasKey(key)) return null
 
-      val fontId = reactContext.resources.getIdentifier(getString(key), "font", reactContext.packageName)
+      val nestedMap = getMap(key) ?: return null
+
+      val fontId = reactContext.resources.getIdentifier(nestedMap.getString("family"), "font", reactContext.packageName)
       if (fontId != 0) return fontId
 
-      val fontsId = reactContext.resources.getIdentifier(getString(key), "fonts", reactContext.packageName)
+      val fontsId = reactContext.resources.getIdentifier(nestedMap.getString("family"), "fonts", reactContext.packageName)
       return if (fontsId != 0) fontsId else null
     }
+}
+
+private class UnflowAnalyticsListener(
+  private val reactContext: ReactApplicationContext,
+  ): AnalyticsListener {
+  override fun onEvent(event: UnflowEvent) {
+    emitEvent(event)
+  }
+
+  @ReactMethod
+  fun emitEvent(event: UnflowEvent) {
+    val eventMap = WritableNativeMap()
+    eventMap.putString("name", event.name)
+    val metadataMap = WritableNativeMap()
+    event.metadata.forEach {
+      when(it.value) {
+        is Long -> {  metadataMap.putDouble(it.key, ((it.value as? Long) ?: 0).toDouble())  }
+        is Int -> {  metadataMap.putInt(it.key, ((it.value as? Int) ?: 0)) }
+        is String -> {  metadataMap.putString(it.key, (it.value as? String))  }
+        is Boolean -> {  metadataMap.putBoolean(it.key, (it.value as? Boolean) ?: false)  }
+        null -> {  metadataMap.putNull(it.key) }
+        is List<*> -> {  metadataMap.putArray(it.key, makeNativeArray(it.value)) }
+      }
+    }
+    eventMap.putMap("metadata", metadataMap)
+
+    reactContext
+      .getJSModule(RCTDeviceEventEmitter::class.java)
+      .emit("EventReceived", eventMap)
+  }
+
+  private fun makeNativeArray(value: Any?): WritableNativeArray {
+    val array = WritableNativeArray()
+    (value as? List<*>)?.forEach { arrayValue ->
+      when(arrayValue) {
+        is Long -> {
+          array.pushDouble(((arrayValue as? Long) ?: 0).toDouble())
+        }
+        is Int -> {
+          array.pushInt(((arrayValue as? Int) ?: 0))
+        }
+        is String -> {
+          array.pushString((arrayValue as? String))
+        }
+        is Boolean -> {
+          array.pushBoolean(arrayValue as? Boolean ?: false)
+        }
+        null -> {
+          array.pushNull()
+        }
+      }
+    }
+    return array
+  }
 }
