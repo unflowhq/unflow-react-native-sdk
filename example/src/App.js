@@ -22,7 +22,7 @@ export default function App() {
   Unflow.sync();
   Unflow.setCustomFonts({
     button: { family: 'shadowsintolight_regular', size: 26 },
-  });  
+  });
   return (
     <GestureHandlerRootView style={styles.container}>
       <NavigationContainer>
