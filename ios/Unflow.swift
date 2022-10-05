@@ -4,9 +4,21 @@ import Combine
 
 class UnflowAnalyticsListener: UnflowUI.AnalyticsListener {
     func onEvent(event: UnflowUI.UnflowEvent) {
-        print("\(event.name) metadata: \(event.metadata)")
+        print("UnflowEvent: \(event.name) metadata: \(event.metadata)")
+        if #available(iOS 13, *) {
+            EventEmitter.sharedInstance.dispatch(
+                name: EventName.eventReceived.key,
+                body: [
+                    "id": event.id,
+                    "name": event.name,
+                    "metadata": event.metadata,
+                    "occurredAt": event.occuredAt
+                ]
+            )
+        }
     }
 }
+
 
 class EventMetadata: Codable {}
 
@@ -21,12 +33,14 @@ fileprivate extension Decodable {
 @objc(Unflow)
 class Unflow: NSObject {
 
+    private let listener = UnflowAnalyticsListener()
+
     @objc(initialize:withEnableLogging:)
     func initialize(apiKey: String, enableLogging: Bool) -> Void {
         if #available(iOS 13.0, *) {
             _ = UnflowSDK.initialize(
                 config: UnflowSDK.Config(apiKey: apiKey, enableLogging: enableLogging),
-                analyticsListener: UnflowAnalyticsListener()
+                analyticsListener: listener
             )
         }
     }
@@ -140,7 +154,7 @@ class Unflow: NSObject {
                         ] as [String : Any?]
                     }
                     EventEmitter.sharedInstance.dispatch(
-                        name: "OpenersChanged",
+                        name: EventName.openersChanged.key,
                         body: [spaceKey: mappedOpeners]
                     )
                 }
@@ -169,7 +183,7 @@ class Unflow: NSObject {
                         ]
                     }
                     EventEmitter.sharedInstance.dispatch(
-                        name: "SpacesChanged",
+                        name: EventName.spacesChanged.key,
                         body: mappedSpaces
                     )
                 }
