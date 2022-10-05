@@ -9,8 +9,10 @@ class UnflowAnalyticsListener: UnflowUI.AnalyticsListener {
             EventEmitter.sharedInstance.dispatch(
                 name: EventName.eventReceived.key,
                 body: [
+                    "id": event.id,
                     "name": event.name,
-                    "metadata": event.metadata
+                    "metadata": event.metadata,
+                    "occurredAt": event.occuredAt
                 ]
             )
         }

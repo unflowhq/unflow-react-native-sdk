@@ -32,7 +32,7 @@ const SpacesView: React.FC<UnflowSpacesViewType> = ({ cardStyle }) => {
 
 const useSpaces = () => {
   let [spaces, setSpaces] = useState<UnflowSpace[]>([]);
-  
+
   let onSpacesChanged = (event: UnflowSpace[]) => {
     setSpaces(event);
   };

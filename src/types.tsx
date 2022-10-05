@@ -1,4 +1,4 @@
-import type { StyleProp, ViewStyle } from 'react-native';
+import type { EmitterSubscription, StyleProp, ViewStyle } from 'react-native';
 
 export type UnflowSpace = {
   id: number;
@@ -7,10 +7,76 @@ export type UnflowSpace = {
   openers: UnflowOpener[];
 };
 
-export type UnflowEvent = {
-  name: string;
-  metadata: any[];
+export type UnflowEventBase<T extends string> = {
+  id: string;
+  name: T;
+  occurredAt: number;
 };
+
+export type UnflowScreenViewedEvent = UnflowEventBase<'question'> & {
+  metadata: { screen_id: number; page_count?: number };
+};
+
+export type UnflowScreenTransitionedEvent =
+  UnflowEventBase<'screen_transitioned'> & {
+    metadata: { screen_id: number; page_id: number; page_index: number };
+  };
+
+export type UnflowScreenDismissedEvent = UnflowEventBase<'screen_dismissed'> & {
+  metadata: { screen_id: number; page_count?: number; pages_viewed?: number };
+};
+
+export type UnflowOpenerTappedEvent = UnflowEventBase<'opener_tapped'> & {
+  metadata: { screen_id: number };
+};
+
+export type UnflowButtonTappedEvent = UnflowEventBase<'button_tapped'> & {
+  metadata: { uri: string; analytics_id: string };
+};
+
+export type UnflowRatingResponseEvent = UnflowEventBase<'rating_response'> & {
+  metadata: { screen_id: number; rating: number };
+};
+
+export type UnflowPageAppearEvent = UnflowEventBase<'page_appear'> & {
+  metadata: {
+    screen_id: number;
+    page_id: number;
+    page_index: number;
+    total_duration?: number;
+  };
+};
+
+export type UnflowPageDisappearEvent = UnflowEventBase<'page_disappear'> & {
+  metadata: {
+    screen_id: number;
+    page_id: number;
+    page_index: number;
+    total_duration?: number;
+    remaining_duration?: number;
+  };
+};
+
+export type UnflowQuestionAnsweredEvent =
+  UnflowEventBase<'question_answered'> & {
+    metadata: {
+      screen_id: number;
+      block_id: number;
+      selections: string[];
+      analytics_id: string;
+    };
+  };
+
+export type UnflowEvent =
+  | UnflowScreenViewedEvent
+  | UnflowScreenTransitionedEvent
+  | UnflowScreenDismissedEvent
+  | UnflowOpenerTappedEvent
+  | UnflowButtonTappedEvent
+  | UnflowRatingResponseEvent
+  | UnflowPageAppearEvent
+  | UnflowPageDisappearEvent
+  | UnflowQuestionAnsweredEvent;
 
 export type UnflowOpener = {
   id: number;
@@ -60,4 +126,8 @@ export type UnflowType = {
   openScreen(screenId: number): null;
   trackEvent(eventName: string, metadata: { [key: string]: any }): null;
   deregisterToken(): null;
+  addAnalyticsListener: (
+    callback: (event: UnflowEvent) => void
+  ) => EmitterSubscription;
+  removeAnalyticsListener: (subscription: EmitterSubscription) => void;
 };
