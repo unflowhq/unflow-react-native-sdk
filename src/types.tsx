@@ -10,7 +10,7 @@ export type UnflowSpace = {
 export type UnflowEventBase<T extends string> = {
   id: string;
   name: T;
-  occurredAt: number;
+  occurredAt?: number;
 };
 
 export type UnflowScreenViewedEvent = UnflowEventBase<'question'> & {
