@@ -159,9 +159,13 @@ class Unflow: NSObject {
     func trackEvent(eventName: String, metadata: NSDictionary) -> Void {
         if #available(iOS 13.0, *) {
             do {
-                let attributes = try EventMetadata(from: metadata)
-                UnflowSDK.client.trackEvent(eventName, attributes: attributes)
-            } catch {}
+                // Simply checks for valid JSON
+                _ = try EventMetadata(from: metadata)
+                let bridgedAttributes = UnflowMetadataBridge.convert(metadata: metadata)
+                UnflowSDK.client.trackEvent(eventName, attributes: bridgedAttributes)
+            } catch {
+                print("Unflow: Unable to track event")
+            }
         }
     }
 
