@@ -6,13 +6,17 @@ class UnflowAnalyticsListener: UnflowUI.AnalyticsListener {
     func onEvent(event: UnflowUI.UnflowEvent) {
         print("UnflowEvent: \(event.name) metadata: \(event.metadata)")
         if #available(iOS 13, *) {
-            EventEmitter.sharedInstance.dispatch(
-                name: EventName.eventReceived.key,
-                body: [
-                    "name": event.name,
-                    "metadata": event.metadata
-                ]
-            )
+            Task {
+                await MainActor.run(body: {
+                    EventEmitter.sharedInstance.dispatch(
+                        name: EventName.eventReceived.key,
+                        body: [
+                            "name": event.name,
+                            "metadata": event.metadata
+                        ]
+                    )
+                })
+            }
         }
     }
 }
@@ -46,7 +50,11 @@ class Unflow: NSObject {
     @objc(sync)
     func sync() -> Void {
         if #available(iOS 13.0, *) {
-            UnflowSDK.client.sync()
+            Task {
+                await MainActor.run(body: {
+                    UnflowSDK.client.sync()
+                })
+            }
         }
     }
 
@@ -62,14 +70,22 @@ class Unflow: NSObject {
     @objc(pause)
     func pause() -> Void {
         if #available(iOS 13.0, *) {
-            UnflowSDK.client.pause()
+            Task {
+                await MainActor.run(body: {
+                    UnflowSDK.client.pause()
+                })
+            }
         }
     }
 
     @objc(setUserId:)
     func setUserId(userId: String) -> Void {
         if #available(iOS 13.0, *) {
-            UnflowSDK.client.setUserId(userId: userId)
+            Task {
+                await MainActor.run(body: {
+                    UnflowSDK.client.setUserId(userId: userId)
+                })
+            }
         }
     }
 
@@ -79,22 +95,35 @@ class Unflow: NSObject {
             guard let mappedAttribtues = attributes as? [String: String] else {
                 return
             }
-            UnflowSDK.client.setAttributes(attributes: mappedAttribtues)
+            Task {
+                await MainActor.run(body: {
+                    UnflowSDK.client.setAttributes(attributes: mappedAttribtues)
+                })
+            }
         }
     }
 
     @objc(setCustomFonts:)
     func setCustomFonts(fonts: NSDictionary) -> Void {
         if #available(iOS 13.0, *) {
-            UnflowSDK.client.setCustomFonts(
-                fonts: .init(
-                    title: convertToFont(font: fonts["title"], defaultSize: 24),
-                    body: convertToFont(font: fonts["body"], defaultSize: 16),
-                    button: convertToFont(font: fonts["button"], defaultSize: 16),
-                    openerTitle: convertToFont(font: fonts["openerTitle"], defaultSize: 14),
-                    openerSubtitle: convertToFont(font: fonts["openerSubtitle"], defaultSize: 12)
-                )
-            )
+            let title = convertToFont(font: fonts["title"], defaultSize: 24)
+            let body = convertToFont(font: fonts["body"], defaultSize: 16)
+            let button = convertToFont(font: fonts["button"], defaultSize: 16)
+            let openerTitle = convertToFont(font: fonts["openerTitle"], defaultSize: 14)
+            let openerSubtitle = convertToFont(font: fonts["openerSubtitle"], defaultSize: 12)
+            Task {
+                await MainActor.run(body: {
+                    UnflowSDK.client.setCustomFonts(
+                        fonts: .init(
+                            title: title,
+                            body: body,
+                            button: button,
+                            openerTitle: openerTitle,
+                            openerSubtitle: openerSubtitle
+                        )
+                    )
+                })
+            }
         }
     }
     
@@ -115,7 +144,11 @@ class Unflow: NSObject {
     func openScreen(screenId: Double) -> Void {
         if #available(iOS 13.0, *) {
             do {
-                try UnflowSDK.client.openScreen(withID: Int(screenId))
+                Task {
+                    try await MainActor.run(body: {
+                        try UnflowSDK.client.openScreen(withID: Int(screenId))
+                    })
+                }
             } catch {}
         }
     }
@@ -133,7 +166,11 @@ class Unflow: NSObject {
     @objc(deregisterToken)
     func deregisterToken() -> Void {
         if #available(iOS 13.0, *) {
-            UnflowSDK.client.deregisterToken()
+            Task {
+                await MainActor.run(body: {
+                    UnflowSDK.client.deregisterToken()
+                })
+            }
         }
     }
 
@@ -141,6 +178,7 @@ class Unflow: NSObject {
     func openers(spaceKey: String) -> Void {
         if #available(iOS 13.0, *) {
             let publisher = UnflowSDK.client.openers(id: spaceKey)
+                .receive(on: RunLoop.main)
                 .sink { openers in
                     let mappedOpeners = openers.map {
                         [
@@ -164,6 +202,7 @@ class Unflow: NSObject {
     func spaces() -> Void {
         if #available(iOS 13.0, *) {
             let publisher = UnflowSDK.client.spaces()
+                .receive(on: RunLoop.main)
                 .sink { spaces in
                     let mappedSpaces = spaces.map {
                         return [
