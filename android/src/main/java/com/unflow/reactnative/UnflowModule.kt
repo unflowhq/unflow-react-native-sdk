@@ -3,10 +3,10 @@ package com.unflow.reactnative
 import android.util.Log
 import com.facebook.react.bridge.*
 import com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter
-import com.unflow.androidsdk.UnflowSdk
-import com.unflow.androidsdk.ui.theme.Fonts
 import com.unflow.analytics.AnalyticsListener
 import com.unflow.analytics.domain.model.UnflowEvent
+import com.unflow.androidsdk.UnflowSdk
+import com.unflow.androidsdk.ui.theme.Fonts
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collectLatest
 
@@ -176,12 +176,21 @@ class UnflowModule(
     private fun ReadableMap.getFontResId(key: String): Int? {
       if (!hasKey(key)) return null
 
-      val nestedMap = getMap(key) ?: return null
+      val fontFamily: String?;
+      when (getType(key)) {
+        ReadableType.String -> {
+          fontFamily = getString(key)
+        }
+        ReadableType.Map -> {
+          fontFamily = getMap(key)?.getString("family")
+        }
+        else -> { return null }
+      }
 
-      val fontId = reactContext.resources.getIdentifier(nestedMap.getString("family"), "font", reactContext.packageName)
+      val fontId = reactContext.resources.getIdentifier(fontFamily, "font", reactContext.packageName)
       if (fontId != 0) return fontId
 
-      val fontsId = reactContext.resources.getIdentifier(nestedMap.getString("family"), "fonts", reactContext.packageName)
+      val fontsId = reactContext.resources.getIdentifier(fontFamily, "fonts", reactContext.packageName)
       return if (fontsId != 0) fontsId else null
     }
 }
@@ -196,7 +205,11 @@ private class UnflowAnalyticsListener(
   @ReactMethod
   fun emitEvent(event: UnflowEvent) {
     val eventMap = WritableNativeMap()
+
+    eventMap.putString("id", event.id)
     eventMap.putString("name", event.name)
+    event.occurredAt?.let { eventMap.putDouble("occurredAt", it.toDouble()) }
+
     val metadataMap = WritableNativeMap()
     event.metadata.forEach {
       when(it.value) {

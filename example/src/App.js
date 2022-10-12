@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import Unflow from 'unflow-react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -20,9 +20,20 @@ export default function App() {
   Unflow.initialize('ae469c05ed6d8f7c1d46d12901f661c9', true);
   Unflow.setUserId('unflow-mirror_react-native');
   Unflow.sync();
+  // Unflow.setCustomFonts({ button: 'shadowsintolight_regular' });
   Unflow.setCustomFonts({
     button: { family: 'shadowsintolight_regular', size: 26 },
   });
+
+  const unflowAnalyticsListener = (event) => {
+    console.log(event);
+  };
+
+  useEffect(() => {
+    let subscription = Unflow.addAnalyticsListener(unflowAnalyticsListener);
+    return () => Unflow.removeAnalyticsListener(subscription);
+  }, []);
+
   return (
     <GestureHandlerRootView style={styles.container}>
       <NavigationContainer>
