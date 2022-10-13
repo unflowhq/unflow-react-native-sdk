@@ -102,6 +102,14 @@ export type UnflowOpenerViewType = {
   }) => {};
 };
 
+type AttributeValue = string | number | boolean;
+type AttributeObject = { [key: string] : AttributeValue | AttributeValue[] }
+type MetadataAttributeValue = AttributeValue | AttributeValue[] | AttributeObject[];
+
+type Metadata = {
+  [key: string]: MetadataAttributeValue;
+};
+
 type Font =
   | string
   | {
@@ -124,7 +132,7 @@ export type UnflowType = {
     openerSubtitle?: Font;
   }): null;
   openScreen(screenId: number): null;
-  trackEvent(eventName: string, metadata: { [key: string]: any }): null;
+  trackEvent(eventName: string, metadata: Metadata): null;
   deregisterToken(): null;
   addAnalyticsListener: (
     callback: (event: UnflowEvent) => void
