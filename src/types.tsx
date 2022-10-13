@@ -103,8 +103,11 @@ export type UnflowOpenerViewType = {
 };
 
 type AttributeValue = string | number | boolean;
-type AttributeObject = { [key: string] : AttributeValue | AttributeValue[] }
-type MetadataAttributeValue = AttributeValue | AttributeValue[] | AttributeObject[];
+type AttributeObject = { [key: string]: AttributeValue | AttributeValue[] };
+type MetadataAttributeValue =
+  | AttributeValue
+  | AttributeValue[]
+  | AttributeObject[];
 
 type Metadata = {
   [key: string]: MetadataAttributeValue;
