@@ -173,6 +173,11 @@ class UnflowModule(
       openerJobs.add(job)
     }
 
+    @ReactMethod
+    fun setPushToken(token: String) {
+      UnflowSdk.client().registerPushToken(token = token)
+    }
+
     private fun ReadableMap.getFontResId(key: String): Int? {
       if (!hasKey(key)) return null
 

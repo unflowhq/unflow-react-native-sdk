@@ -234,6 +234,16 @@ class Unflow: NSObject {
         }
     }
 
+    @objc(setPushToken:)
+    func setPushToken(token: NSString) {
+        let token = token as String
+        if #available(iOS 13.0, *) {
+            Task { @MainActor in
+                UnflowSDK.client.registerToken(token: token)
+            }
+        }
+    }
+
     @objc static func requiresMainQueueSetup() -> Bool {
         return true
     }
