@@ -51,5 +51,6 @@ jobs:
           workspace: example/ios/UnflowReactNativeExample.xcworkspace
           scheme: UnflowReactNativeExample
           configuration: Debug
+          allow-provisioning-updates: true
           build-settings: CODE_SIGN_IDENTITY="Apple Development" CODE_SIGNING_REQUIRED=NO
           action: clean build
