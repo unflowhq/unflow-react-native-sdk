@@ -10,6 +10,8 @@ jobs:
   build_lint:
     name: Build + Lint
     runs-on: macos-12
+    env: 
+      BUNDLE_GEMFILE: examples/ios/Gemfile
     steps:
       - uses: actions/checkout@v2
 
