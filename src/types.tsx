@@ -136,6 +136,7 @@ export type UnflowType = {
   }): null;
   openScreen(screenId: number): null;
   trackEvent(eventName: string, metadata: Metadata): null;
+  setPushToken(token: string): null;
   deregisterToken(): null;
   addAnalyticsListener: (
     callback: (event: UnflowEvent) => void
