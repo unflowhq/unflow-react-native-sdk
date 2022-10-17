@@ -10,8 +10,6 @@ jobs:
   build_lint:
     name: Build + Lint
     runs-on: macos-12
-    env: 
-      BUNDLE_GEMFILE: example/ios/Gemfile
     steps:
       - uses: actions/checkout@v2
 
@@ -43,10 +41,11 @@ jobs:
       - name: Build package
         run: yarn prepare
 
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
+      - name: Set up ruby env
+        uses: ruby/setup-ruby@v1.100.0
         with:
-          ruby-version: 2.6
+          working-directory: example/ios
+          ruby-version: 2.6.8
           bundler-cache: true
 
       - name: Restore pods ( if available )
