@@ -10,6 +10,12 @@ jobs:
   build_lint:
     name: Build + Lint
     runs-on: macos-12
+    strategy:
+      matrix:
+        platform:
+          - iOS
+        xcode:
+          - ^14
     steps:
       - uses: actions/checkout@v2
 
@@ -45,12 +51,12 @@ jobs:
         working-directory: example/ios
         run: pod install
 
-      - name: Build example iOS app
-        uses: sersoft-gmbh/xcodebuild-action@v2
+      - name: Build Example iOS app
+        uses: mxcl/xcodebuild@v1.11.0
         with:
-          workspace: example/ios/UnflowReactNativeExample.xcworkspace
-          scheme: UnflowReactNativeExample
-          configuration: Debug
-          allow-provisioning-updates: true
-          build-settings: CODE_SIGN_IDENTITY="Apple Development" CODE_SIGNING_REQUIRED=NO
-          action: clean build
+          xcode: ${{ matrix.xcode }}
+          platform: ${{ matrix.platform }}
+          action: build 
+          code-coverage: false # default = `false`
+          warnings-as-errors: false # default = `false`
+          configuration: debug
