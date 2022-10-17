@@ -105,7 +105,7 @@ const DefaultCard: React.FC<DefaultCardProps> = ({
     {opener.imageURL && <Thumnail uri={opener.imageURL} />}
     <View style={styles.content}>
       <Text style={[styles.title, titleStyles[style]]}>{opener?.title}</Text>
-      { opener.subtitle != undefined && opener?.subtitle != "" && (
+      {opener.subtitle !== undefined && opener?.subtitle !== '' && (
         <Text
           style={[styles.subtitle, subtitleStyles[style]]}
           numberOfLines={2}
