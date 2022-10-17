@@ -52,8 +52,8 @@ jobs:
         run: pod install
 
       - name: Build Example iOS app
-        working-directory: example/ios
         uses: mxcl/xcodebuild@v1.11.0
+        working-directory: example/ios
         with:
           xcode: ${{ matrix.xcode }}
           platform: ${{ matrix.platform }}
