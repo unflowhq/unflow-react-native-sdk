@@ -6,6 +6,10 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		FA39CC3928FD81BC005753D8 /* UnflowMetadataBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA39CC3828FD81BC005753D8 /* UnflowMetadataBridge.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		58B511D91A9E6C8500147676 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -25,6 +29,7 @@
 		5A1C11EC2757E5AD00F4F905 /* UnflowReactNativeViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnflowReactNativeViewManager.m; sourceTree = "<group>"; };
 		5A1C11ED2757E5AD00F4F905 /* Unflow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Unflow.m; sourceTree = "<group>"; };
 		5A1C11EE2757E5AD00F4F905 /* Unflow-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Unflow-Bridging-Header.h"; sourceTree = "<group>"; };
+		FA39CC3828FD81BC005753D8 /* UnflowMetadataBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnflowMetadataBridge.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +54,7 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				FA39CC3828FD81BC005753D8 /* UnflowMetadataBridge.swift */,
 				5A1C11EE2757E5AD00F4F905 /* Unflow-Bridging-Header.h */,
 				5A1C11ED2757E5AD00F4F905 /* Unflow.m */,
 				5A1C11EB2757E5AD00F4F905 /* Unflow.swift */,
@@ -115,6 +121,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA39CC3928FD81BC005753D8 /* UnflowMetadataBridge.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
