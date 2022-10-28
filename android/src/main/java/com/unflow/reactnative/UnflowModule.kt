@@ -9,6 +9,7 @@ import com.unflow.androidsdk.UnflowSdk
 import com.unflow.androidsdk.ui.theme.Fonts
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collectLatest
+import java.util.*
 
 class UnflowModule(
   private val reactContext: ReactApplicationContext,
@@ -84,6 +85,25 @@ class UnflowModule(
     @ReactMethod
     fun openScreen(screenId: Int) {
       UnflowSdk.client().openScreen(screenId = screenId.toLong())
+    }
+
+    @ReactMethod
+    fun setLocale(locale: String, language: String) {
+        val localeObject = Locale.getAvailableLocales().firstOrNull { it.toString() == locale }
+        val languageObject = Locale.getAvailableLocales().firstOrNull { it.language == language }
+
+        if(localeObject == null) {
+          Log.e("UNFLOW", "Unable to set locale as ${locale}")
+        }
+        if (languageObject == null) {
+          Log.e("UNFLOW", "Unable to set language as ${language}")
+        }
+
+        localeObject?.let { locale ->
+          languageObject?.let { languageLocale ->
+            UnflowSdk.client().setUserLocale(locale = locale, language = languageLocale)
+          }
+        }
     }
 
     @ReactMethod
