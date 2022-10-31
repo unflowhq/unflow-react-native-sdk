@@ -154,6 +154,18 @@ class Unflow: NSObject {
             } catch {}
         }
     }
+
+    @objc(setLocale:withLanguage:)
+    func setLocale(locale: String, language: String) {
+        if #available(iOS 13, *) {
+            guard Locale.availableIdentifiers.contains(locale) else {
+                print("Unflow: Locale '\(locale)' not valid")
+                return
+            }
+            let locale = Locale.init(identifier: locale)
+            UnflowSDK.client.setUserLocale(locale: locale, language: language)
+        }
+    }
     
     @objc(trackEvent:withMetadata:)
     func trackEvent(eventName: String, metadata: NSDictionary) -> Void {
