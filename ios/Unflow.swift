@@ -94,13 +94,18 @@ class Unflow: NSObject {
     @objc(setAttributes:)
     func setAttributes(attributes: NSDictionary) -> Void {
         if #available(iOS 13.0, *) {
-            guard let mappedAttribtues = attributes as? [String: String] else {
-                return
-            }
-            Task {
-                await MainActor.run(body: {
-                    UnflowSDK.client.setAttributes(attributes: mappedAttribtues)
-                })
+            do {
+                // Simply checks for valid JSON
+                
+                _ = try EventMetadata(from: attributes)
+                let bridgedAttributes = UnflowMetadataBridge.convert(metadata: attributes)
+                Task {
+                    await MainActor.run(body: {
+                        UnflowSDK.client.setAttributes(attributes: bridgedAttributes)
+                    })
+                }
+            } catch {
+                print("Unflow: Unable to set attributes")
             }
         }
     }
@@ -152,6 +157,18 @@ class Unflow: NSObject {
                     })
                 }
             } catch {}
+        }
+    }
+
+    @objc(setLocale:withLanguage:)
+    func setLocale(locale: String, language: String) {
+        if #available(iOS 13, *) {
+            guard Locale.availableIdentifiers.contains(locale) else {
+                print("Unflow: Locale '\(locale)' not valid")
+                return
+            }
+            let locale = Locale.init(identifier: locale)
+            UnflowSDK.client.setUserLocale(locale: locale, language: language)
         }
     }
     

@@ -352,10 +352,10 @@ PODS:
     - React-RCTImage
   - RNSVG (12.3.0):
     - React-Core
-  - Unflow (1.12.1)
-  - unflow-react-native (1.12.2):
+  - Unflow (1.13.0-swift-5.6)
+  - unflow-react-native (1.13.0):
     - React-Core
-    - Unflow (= 1.12.1)
+    - Unflow (= 1.13.0-swift-5.6)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -562,8 +562,8 @@ SPEC CHECKSUMS:
   RNGestureHandler: 6e757e487a4834e7280e98e9bac66d2d9c575e9c
   RNScreens: 40a2cb40a02a609938137a1e0acfbf8fc9eebf19
   RNSVG: 302bfc9905bd8122f08966dc2ce2d07b7b52b9f8
-  Unflow: 6cdf0cea5e2ff605321d73b663b7e5ddce8aa19e
-  unflow-react-native: 3f2ce08848258c1c258835e698f95172ef9be252
+  Unflow: 085a89a706e4ea0b484388f87ae3af43f19ff91a
+  unflow-react-native: 2a0f3c13439aac92c011357af0cf1dac7be85949
   Yoga: 5cbf25add73edb290e1067017690f7ebf56c5468
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 

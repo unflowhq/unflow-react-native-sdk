@@ -17,4 +17,5 @@ RCT_EXTERN_METHOD(spaces)
 RCT_EXTERN_METHOD(addListener:(NSString *)eventName)
 RCT_EXTERN_METHOD(removeListeners:(NSInteger)count)
 RCT_EXTERN_METHOD(setPushToken:(NSString *)token)
+RCT_EXTERN_METHOD(setLocale:(NSString *)locale withLanguage:(NSString*)language)
 @end
