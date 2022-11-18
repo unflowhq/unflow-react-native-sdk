@@ -104,7 +104,7 @@ export type UnflowOpenerViewType = {
 
 type AttributeValue = string | number | boolean;
 type AttributeObject = { [key: string]: AttributeValue | AttributeValue[] };
-type MetadataAttributeValue =
+export type MetadataAttributeValue =
   | AttributeValue
   | AttributeValue[]
   | AttributeObject[];
@@ -126,7 +126,7 @@ export type UnflowType = {
   close(): null;
   pause(): null;
   setUserId(userId: string): null;
-  setAttributes({}: { [key: string]: string }): null;
+  setAttributes({}: { [key: string]: string | number | Date | null }): null;
   setCustomFonts({}: {
     title?: Font;
     body?: Font;
