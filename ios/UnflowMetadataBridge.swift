@@ -20,11 +20,20 @@ struct UnflowMetadataBridge {
         if let analyticsValue = value as? UnflowAnalyticsValue {
             return analyticsValue
         } else if let numberValue = value as? NSNumber {
-            return numberValue.doubleValue
+            if CFGetTypeID(numberValue) == CFBooleanGetTypeID() {
+                return numberValue.boolValue
+            } else {
+                return numberValue.doubleValue
+            }
         } else if let stringValue = value as? NSString {
-            return String(stringValue)
-        } else if let date = value as? NSDate {
-            return date as Date
+            let swiftString = String(stringValue)
+            let dateFormatterGet = DateFormatter()
+            dateFormatterGet.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSXXX"
+            if let date = dateFormatterGet.date(from: swiftString) {
+                return date as Date
+            } else {
+                return swiftString
+            }
         } else if let array = value as? NSArray {
             return array.compactMap(convertToAnalyticsValue)
         } else if let dictionary = value as? NSDictionary {

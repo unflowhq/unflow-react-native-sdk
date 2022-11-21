@@ -5,7 +5,7 @@ import {
 } from './analytics-listener';
 import OpenerView, { useSpace } from './opener-view';
 import SpacesView, { useSpaces } from './spaces-view';
-import type { UnflowType, MetadataAttributeValue } from './types';
+import type { UnflowType } from './types';
 
 const { Unflow } = NativeModules;
 
@@ -13,32 +13,40 @@ export { OpenerView, SpacesView, useSpace, useSpaces };
 
 function initialize(apiKey: string, enableLogging: boolean) {
   if (!apiKey || typeof apiKey !== 'string') {
-    throw 'Your API key must be a non-empty string';
+    throw 'Unflow: Your API key should be a non-empty string';
   }
   if (typeof enableLogging !== 'boolean') {
-    console.debug('The enable logging flag should be a boolean');
+    console.debug('The Unflow enable logging flag should be a boolean');
   }
   Unflow.initialize(apiKey, enableLogging);
 }
 
 function setUserId(value: string) {
   if (!value || typeof value !== 'string') {
-    throw 'You must the user Id to a non-empty string';
+    throw 'Unflow: The user ID must be set to a non-empty string';
   }
   Unflow.setUserId(value);
 }
 
-// setAttributes
+type AttributeValue = string | number | Date | null;
+
+function setAttributes(attributes: {
+  [key: string]: string | number | Date | null;
+}) {
+  if (!attributes || typeof attributes !== 'object') {
+    console.debug('Unflow: Attributes must be sent as an object');
+    return;
+  }
+  Unflow.setAttributes(attributes);
+}
 
 function openScreen(id: number) {
   if (!id || typeof id !== 'number') {
-    console.debug('The screen Id must be a number');
+    console.debug('Unflow: A screen ID should be a number');
     return;
   }
   Unflow.openScreen(id);
 }
-
-type AttributeValue = string | number | boolean;
 
 function trackEvent(
   eventName: string,
@@ -49,7 +57,7 @@ function trackEvent(
 
 function setPushToken(value: string) {
   if (!value || typeof value !== 'string') {
-    console.debug('The push token must be a non-empty string');
+    console.debug('Unflow: A push token must be a non-empty string');
     return;
   }
   Unflow.setUserId(value);
@@ -59,8 +67,9 @@ export default {
   ...Unflow,
   initialize,
   setUserId,
-  openScreen,
+  setAttributes,
   trackEvent,
+  openScreen,
   setPushToken,
   addAnalyticsListener: addAnalyticsListener,
   removeAnalyticsListener: removeAnalyticsListener,
