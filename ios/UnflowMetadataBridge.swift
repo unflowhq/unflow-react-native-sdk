@@ -9,6 +9,8 @@ import Foundation
 import UnflowUI
 
 struct UnflowMetadataBridge {
+    static let dateFormatter = ISO8601DateFormatter()
+
     static func convert(metadata: NSDictionary) -> [String: UnflowAnalyticsValue] {
         metadata.compactMap { (key: Any, value: Any) -> (String, UnflowAnalyticsValue)? in
             guard let key = key as? String, let value = convertToAnalyticsValue(value) else { return nil }
@@ -27,9 +29,7 @@ struct UnflowMetadataBridge {
             }
         } else if let stringValue = value as? NSString {
             let swiftString = String(stringValue)
-            let dateFormatterGet = DateFormatter()
-            dateFormatterGet.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSXXX"
-            if let date = dateFormatterGet.date(from: swiftString) {
+            if let date = dateFormatter.date(from: swiftString) {
                 return date as Date
             } else {
                 return swiftString
