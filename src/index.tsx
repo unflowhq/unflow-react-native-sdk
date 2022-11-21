@@ -29,10 +29,9 @@ function setUserId(value: string) {
 }
 
 type AttributeValue = string | number | Date | null;
+type MetadataAttributeValue = AttributeValue | AttributeValue[];
 
-function setAttributes(attributes: {
-  [key: string]: string | number | Date | null;
-}) {
+function setAttributes(attributes: { [key: string]: MetadataAttributeValue }) {
   if (!attributes || typeof attributes !== 'object') {
     console.debug('Unflow: Attributes must be sent as an object');
     return;
@@ -48,10 +47,7 @@ function openScreen(id: number) {
   Unflow.openScreen(id);
 }
 
-function trackEvent(
-  eventName: string,
-  metadata: AttributeValue | AttributeValue[]
-) {
+function trackEvent(eventName: string, metadata: MetadataAttributeValue) {
   Unflow.trackEvent(eventName, metadata);
 }
 
