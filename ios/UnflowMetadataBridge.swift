@@ -9,7 +9,11 @@ import Foundation
 import UnflowUI
 
 struct UnflowMetadataBridge {
-    static let dateFormatter = ISO8601DateFormatter()
+    static var dateFormatter: ISO8601DateFormatter = {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        return formatter
+    }()
 
     static func convert(metadata: NSDictionary) -> [String: UnflowAnalyticsValue] {
         metadata.compactMap { (key: Any, value: Any) -> (String, UnflowAnalyticsValue)? in
