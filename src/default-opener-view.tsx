@@ -67,7 +67,7 @@ const DefaultOpenerView: React.FC<DefaultOpenerViewProps> = ({
       showsHorizontalScrollIndicator={false}
     >
       {openers.map((opener) => (
-        <View>
+        <View key={opener.id}>
           <TouchableOpacity
             activeOpacity={0.9}
             onPress={() => Unflow.openScreen(opener.id)}

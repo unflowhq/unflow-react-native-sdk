@@ -126,7 +126,7 @@ export type UnflowType = {
   close(): null;
   pause(): null;
   setUserId(userId: string): null;
-  setAttributes({}: { [key: string]: string }): null;
+  setAttributes({}: { [key: string]: string | number | Date | null }): null;
   setCustomFonts({}: {
     title?: Font;
     body?: Font;
