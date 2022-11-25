@@ -1,4 +1,11 @@
 {
-  "name": "ExpoModules",
-  "displayName": "ExpoModules"
+  "expo": {
+    "name": "My app",
+    "android": {
+      "package": "com.unflow.expomodules"
+    },
+    "ios": {
+      "bundleIdentifier": "com.unflow.expomodules"
+    }
+  }
 }

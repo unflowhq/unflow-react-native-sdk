@@ -1,4 +1,4 @@
-package com.expomodules;
+package com.unflow.expomodules;
 import expo.modules.ReactActivityDelegateWrapper;
 import com.facebook.react.ReactActivityDelegate;
 

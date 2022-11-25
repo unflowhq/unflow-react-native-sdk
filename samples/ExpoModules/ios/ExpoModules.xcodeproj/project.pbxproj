@@ -16,6 +16,7 @@
 		92EC9FECA0A81B8BCDEEE1DC /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88304C90BC0ADD474E131D56 /* ExpoModulesProvider.swift */; };
 		E508292451A4B7DB39088826 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B457FE80C1C55B8493D74CD1 /* ExpoModulesProvider.swift */; };
 		F39D2A801BCFD3683F029EF4 /* libPods-ExpoModules.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5605EF00F70F622A565D4B38 /* libPods-ExpoModules.a */; };
+		B7079E7F23DA4B55898DE2F7 /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7AB0DA42A84B6583863B54 /* noop-file.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,9 @@
 		C0A881CF5CF3F2B244570E2A /* Pods-ExpoModules.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExpoModules.debug.xcconfig"; path = "Target Support Files/Pods-ExpoModules/Pods-ExpoModules.debug.xcconfig"; sourceTree = "<group>"; };
 		D00AAFFCFCFDA5787532823F /* Pods-ExpoModules.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExpoModules.release.xcconfig"; path = "Target Support Files/Pods-ExpoModules/Pods-ExpoModules.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		8C7AB0DA42A84B6583863B54 /* noop-file.swift */ = {isa = PBXFileReference; name = "noop-file.swift"; path = "ExpoModules/noop-file.swift"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.swift; explicitFileType = undefined; includeInIndex = 0; };
+		8E849680AC94475AAC1AF345 /* ExpoModules-Bridging-Header.h */ = {isa = PBXFileReference; name = "ExpoModules-Bridging-Header.h"; path = "ExpoModules/ExpoModules-Bridging-Header.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		16755BE130F84D5DB0883B20 /* SplashScreen.storyboard */ = {isa = PBXFileReference; name = "SplashScreen.storyboard"; path = "ExpoModules/SplashScreen.storyboard"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +100,9 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				8C7AB0DA42A84B6583863B54 /* noop-file.swift */,
+				8E849680AC94475AAC1AF345 /* ExpoModules-Bridging-Header.h */,
+				16755BE130F84D5DB0883B20 /* SplashScreen.storyboard */,
 			);
 			name = ExpoModules;
 			sourceTree = "<group>";
@@ -275,6 +282,8 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				88ADDB1EC68747FABCFFAB71 /* ExpoModules-Bridging-Header.h in Resources */,
+				30136A8B2785449D886D0D01 /* SplashScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,6 +454,7 @@
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				92EC9FECA0A81B8BCDEEE1DC /* ExpoModulesProvider.swift in Sources */,
+				B7079E7F23DA4B55898DE2F7 /* noop-file.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,9 +490,12 @@
 					"-lc++",
 					"$(inherited)",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ExpoModules.app/ExpoModules";
+				TARGETED_DEVICE_FAMILY = "1";
+				SWIFT_OBJC_BRIDGING_HEADER = ExpoModules/ExpoModules-Bridging-Header.h;
 			};
 			name = Debug;
 		};
@@ -504,9 +517,12 @@
 					"-lc++",
 					"$(inherited)",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ExpoModules.app/ExpoModules";
+				TARGETED_DEVICE_FAMILY = "1";
+				SWIFT_OBJC_BRIDGING_HEADER = ExpoModules/ExpoModules-Bridging-Header.h;
 			};
 			name = Release;
 		};
@@ -528,11 +544,15 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = ExpoModules;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.unflow.expomodules";
+				PRODUCT_NAME = "Myapp";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
+				TARGETED_DEVICE_FAMILY = "1";
+				SWIFT_OBJC_BRIDGING_HEADER = ExpoModules/ExpoModules-Bridging-Header.h;
+				CODE_SIGN_ENTITLEMENTS = ExpoModules/ExpoModules.entitlements;
 			};
 			name = Debug;
 		};
@@ -553,10 +573,14 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = ExpoModules;
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.unflow.expomodules";
+				PRODUCT_NAME = "Myapp";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
+				TARGETED_DEVICE_FAMILY = "1";
+				SWIFT_OBJC_BRIDGING_HEADER = ExpoModules/ExpoModules-Bridging-Header.h;
+				CODE_SIGN_ENTITLEMENTS = ExpoModules/ExpoModules.entitlements;
 			};
 			name = Release;
 		};
@@ -617,7 +641,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SDKROOT)/usr/lib/swift\"",
 					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
-					"\"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)\"",
 					"\"$(inherited)\"",
 				);
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -676,7 +699,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(SDKROOT)/usr/lib/swift\"",
 					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
-					"\"$(TOOLCHAIN_DIR)/usr/lib/swift-5.0/$(PLATFORM_NAME)\"",
 					"\"$(inherited)\"",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
