@@ -16,5 +16,5 @@ Pod::Spec.new do |s|
   s.source_files = "ios/**/*.{h,m,mm,swift}"
 
   s.dependency "React-Core"
-  s.dependency "Unflow", "1.14.0-swift-5.6"
+  s.dependency "Unflow", "1.14.1-swift-5.6"
 end
