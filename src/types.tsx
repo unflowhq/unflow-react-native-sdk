@@ -109,7 +109,7 @@ type MetadataAttributeValue =
   | AttributeValue[]
   | AttributeObject[];
 
-type Metadata = {
+export type Metadata = {
   [key: string]: MetadataAttributeValue;
 };
 
@@ -143,4 +143,8 @@ export type UnflowType = {
     callback: (event: UnflowEvent) => void
   ) => EmitterSubscription;
   removeAnalyticsListener: (subscription: EmitterSubscription) => void;
+  addAttributesListener: (
+    callback: (attributes: Metadata) => void
+  ) => EmitterSubscription;
+  removeAttributesListener: (subscription: EmitterSubscription) => void;
 };

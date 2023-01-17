@@ -29,9 +29,17 @@ export default function App() {
     console.log(event);
   };
 
+  const unflowAttributesListener = (attributes) => {
+    console.log(attributes);
+  };
+
   useEffect(() => {
     let subscription = Unflow.addAnalyticsListener(unflowAnalyticsListener);
-    return () => Unflow.removeAnalyticsListener(subscription);
+    let attributesSubscription = Unflow.addAttributesListener(unflowAttributesListener);
+    return () => {
+      Unflow.removeAnalyticsListener(subscription)
+      Unflow.removeAttributesListener(attributesSubscription)
+    };
   }, []);
 
   return (

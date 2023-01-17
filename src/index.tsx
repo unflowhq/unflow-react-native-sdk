@@ -3,6 +3,10 @@ import {
   addAnalyticsListener,
   removeAnalyticsListener,
 } from './analytics-listener';
+import {
+  addAttributesListener,
+  removeAttributesListener,
+} from './attributes-listener';
 import OpenerView, { useSpace } from './opener-view';
 import SpacesView, { useSpaces } from './spaces-view';
 import type { UnflowType } from './types';
@@ -69,4 +73,6 @@ export default {
   setPushToken,
   addAnalyticsListener: addAnalyticsListener,
   removeAnalyticsListener: removeAnalyticsListener,
+  addAttributesListener: addAttributesListener,
+  removeAttributesListener: removeAttributesListener
 } as UnflowType;

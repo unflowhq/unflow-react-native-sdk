@@ -227,6 +227,24 @@ private class UnflowAnalyticsListener(
     emitEvent(event)
   }
 
+  override fun onAttributesUpdate(attributes: Map<String, Any?>) {
+    val attributesMap = WritableNativeMap()
+    attributes.forEach {
+      when(it.value) {
+        is Long -> {  attributesMap.putDouble(it.key, ((it.value as? Long) ?: 0).toDouble())  }
+        is Int -> {  attributesMap.putInt(it.key, ((it.value as? Int) ?: 0)) }
+        is String -> {  attributesMap.putString(it.key, (it.value as? String))  }
+        is Boolean -> {  attributesMap.putBoolean(it.key, (it.value as? Boolean) ?: false)  }
+        null -> {  attributesMap.putNull(it.key) }
+        is List<*> -> {  attributesMap.putArray(it.key, makeNativeArray(it.value)) }
+      }
+    }
+
+    reactContext
+      .getJSModule(RCTDeviceEventEmitter::class.java)
+      .emit("AttributesUpdated", attributesMap)
+  }
+
   @ReactMethod
   fun emitEvent(event: UnflowEvent) {
     val eventMap = WritableNativeMap()
