@@ -63,6 +63,10 @@ function setPushToken(value: string) {
   Unflow.setUserId(value);
 }
 
+function clearUserSession() {
+  Unflow.clearUserSession();
+}
+
 export default {
   ...Unflow,
   initialize,
@@ -71,6 +75,7 @@ export default {
   trackEvent,
   openScreen,
   setPushToken,
+  clearUserSession,
   addAnalyticsListener: addAnalyticsListener,
   removeAnalyticsListener: removeAnalyticsListener,
   addAttributesListener: addAttributesListener,

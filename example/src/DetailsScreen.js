@@ -20,6 +20,7 @@ import {
   UnflowMark,
 } from './icons';
 import Section from './Section';
+import Unflow from 'unflow-react-native';
 
 const LINKS_DATA = [
   {
@@ -77,7 +78,10 @@ export default function SettingsScreen() {
   let clearStorage = async () => {
     await storeData({ screens: [], events: [] });
   };
-
+  let resetSession = () => {
+      Unflow.clearUserSession();
+  };
+  
   return (
     <View style={styles.container}>
       <Section title="Useful links">
@@ -98,6 +102,9 @@ export default function SettingsScreen() {
           />
         </View>
       </Section>
+      <TouchableOpacity style={styles.destructiveButton} onPress={resetSession}>
+        <Text style={styles.destructiveButtonText}>Reset User Session</Text>
+      </TouchableOpacity>
       <TouchableOpacity style={styles.destructiveButton} onPress={clearStorage}>
         <Text style={styles.destructiveButtonText}>Clear Cache</Text>
       </TouchableOpacity>
@@ -145,6 +152,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FACDCD',
     marginHorizontal: 16,
     paddingVertical: 12,
+    marginBottom: 12,
     borderRadius: 32,
     alignItems: 'center',
   },

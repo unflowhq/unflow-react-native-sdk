@@ -210,6 +210,17 @@ class Unflow: NSObject {
         }
     }
 
+    @objc(clearUserSession)
+    func clearUserSession() -> Void {
+        if #available(iOS 13.0, *) {
+            Task {
+                await MainActor.run(body: {
+                    UnflowSDK.client.clearUserSession()
+                })
+            }
+        }
+    }
+
     @objc(openers:)
     func openers(spaceKey: String) -> Void {
         if #available(iOS 13.0, *) {

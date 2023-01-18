@@ -122,6 +122,13 @@ class UnflowModule(
     }
 
     @ReactMethod
+    fun clearUserSession() {
+      scope.launch {
+        UnflowSdk.client().clearUserSession()
+      }
+    }
+
+    @ReactMethod
     @Suppress("UNUSED_PARAMETER")
     fun addListener(eventName: String) {}
 

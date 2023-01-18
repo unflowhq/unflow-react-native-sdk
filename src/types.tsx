@@ -147,4 +147,5 @@ export type UnflowType = {
     callback: (attributes: Metadata) => void
   ) => EmitterSubscription;
   removeAttributesListener: (subscription: EmitterSubscription) => void;
+  clearUserSession(): null;
 };
