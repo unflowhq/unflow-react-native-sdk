@@ -74,5 +74,5 @@ export default {
   addAnalyticsListener: addAnalyticsListener,
   removeAnalyticsListener: removeAnalyticsListener,
   addAttributesListener: addAttributesListener,
-  removeAttributesListener: removeAttributesListener
+  removeAttributesListener: removeAttributesListener,
 } as UnflowType;

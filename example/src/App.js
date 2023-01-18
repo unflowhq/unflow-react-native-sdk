@@ -34,11 +34,15 @@ export default function App() {
   };
 
   useEffect(() => {
-    let subscription = Unflow.addAnalyticsListener(unflowAnalyticsListener);
-    let attributesSubscription = Unflow.addAttributesListener(unflowAttributesListener);
+    let analyticsSubscription = Unflow.addAnalyticsListener(
+      unflowAnalyticsListener
+    );
+    let attributesSubscription = Unflow.addAttributesListener(
+      unflowAttributesListener
+    );
     return () => {
-      Unflow.removeAnalyticsListener(subscription)
-      Unflow.removeAttributesListener(attributesSubscription)
+      Unflow.removeAnalyticsListener(analyticsSubscription);
+      Unflow.removeAttributesListener(attributesSubscription);
     };
   }, []);
 
