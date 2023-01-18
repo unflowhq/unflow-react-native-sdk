@@ -79,9 +79,8 @@ export default function SettingsScreen() {
     await storeData({ screens: [], events: [] });
   };
   let resetSession = () => {
-      Unflow.clearUserSession();
+    Unflow.clearUserSession();
   };
-  
   return (
     <View style={styles.container}>
       <Section title="Useful links">
