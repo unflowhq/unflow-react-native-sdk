@@ -34,7 +34,7 @@ class UnflowEventEmitter: RCTEventEmitter {
 }
 
 @objc enum EventName: Int, CaseIterable {
-    case openersChanged, spacesChanged, eventReceived
+    case openersChanged, spacesChanged, eventReceived, attributesUpdated
 
     var key: String {
         switch self {
@@ -44,6 +44,8 @@ class UnflowEventEmitter: RCTEventEmitter {
             return "SpacesChanged"
         case .eventReceived:
             return "EventReceived"
+        case .attributesUpdated:
+            return "AttributesUpdated"
         }
     }
 }

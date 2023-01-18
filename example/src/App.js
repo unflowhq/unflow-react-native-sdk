@@ -29,9 +29,21 @@ export default function App() {
     console.log(event);
   };
 
+  const unflowAttributesListener = (attributes) => {
+    console.log(attributes);
+  };
+
   useEffect(() => {
-    let subscription = Unflow.addAnalyticsListener(unflowAnalyticsListener);
-    return () => Unflow.removeAnalyticsListener(subscription);
+    let analyticsSubscription = Unflow.addAnalyticsListener(
+      unflowAnalyticsListener
+    );
+    let attributesSubscription = Unflow.addAttributesListener(
+      unflowAttributesListener
+    );
+    return () => {
+      Unflow.removeAnalyticsListener(analyticsSubscription);
+      Unflow.removeAttributesListener(attributesSubscription);
+    };
   }, []);
 
   return (

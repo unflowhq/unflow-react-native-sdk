@@ -21,6 +21,19 @@ class UnflowAnalyticsListener: UnflowUI.AnalyticsListener {
             }
         }
     }
+
+    func onAttributesUpdate(attributes: [String: UnflowUI.UnflowAnalyticsValue]) {
+        if #available(iOS 13, *) {
+            Task {
+                await MainActor.run(body: {
+                    EventEmitter.sharedInstance.dispatch(
+                        name: EventName.attributesUpdated.key, 
+                        body: attributes
+                    )
+                })
+            }
+        }
+    }
 }
 
 
@@ -192,6 +205,17 @@ class Unflow: NSObject {
             Task {
                 await MainActor.run(body: {
                     UnflowSDK.client.deregisterToken()
+                })
+            }
+        }
+    }
+
+    @objc(clearUserSession)
+    func clearUserSession() -> Void {
+        if #available(iOS 13.0, *) {
+            Task {
+                await MainActor.run(body: {
+                    UnflowSDK.client.clearUserSession()
                 })
             }
         }

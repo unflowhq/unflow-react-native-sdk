@@ -3,6 +3,10 @@ import {
   addAnalyticsListener,
   removeAnalyticsListener,
 } from './analytics-listener';
+import {
+  addAttributesListener,
+  removeAttributesListener,
+} from './attributes-listener';
 import OpenerView, { useSpace } from './opener-view';
 import SpacesView, { useSpaces } from './spaces-view';
 import type { UnflowType } from './types';
@@ -59,6 +63,10 @@ function setPushToken(value: string) {
   Unflow.setUserId(value);
 }
 
+function clearUserSession() {
+  Unflow.clearUserSession();
+}
+
 export default {
   ...Unflow,
   initialize,
@@ -67,6 +75,9 @@ export default {
   trackEvent,
   openScreen,
   setPushToken,
+  clearUserSession,
   addAnalyticsListener: addAnalyticsListener,
   removeAnalyticsListener: removeAnalyticsListener,
+  addAttributesListener: addAttributesListener,
+  removeAttributesListener: removeAttributesListener,
 } as UnflowType;
